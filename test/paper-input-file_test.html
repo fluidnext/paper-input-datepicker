@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script type="module" src="../paper-input-color.js"></script>
+</head>
+
+<body>
+
+    <test-fixture id="initDefaultValue">
+        <template>
+            <paper-input-color></paper-input-color>
+        </template>
+    </test-fixture>
+    
+    <test-fixture id="setValue">
+        <template>
+            <paper-input-color value="#ffffff" color-type="rgb"></paper-input-color>
+        </template>
+    </test-fixture>
+    
+    <test-fixture id="changeValue">
+        <template>
+            <paper-input-color></paper-input-color>
+        </template>
+    </test-fixture>
+    
+    <test-fixture id="clearInput">
+        <template>
+            <paper-input-color value="#ffffff"></paper-input-color>
+        </template>
+    </test-fixture>
+
+    <script>
+        suite('testingAttribute', function () {
+            
+            test('initDefaultValue', function () {
+                var element = fixture('initDefaultValue');
+                //Default Value
+                assert.equal(element.invalid, false); //paper-input attribute
+                assert.equal(element.required, false); //paper-input attribute
+                assert.equal(element.disabled, false); //paper-input attribute
+                assert.equal(element.colorType, 'hex');
+                assert.equal(element.label, 'Select Color');
+            });
+            
+            test('setValue', function () {
+                var element = fixture('setValue');
+                // Value set in attribute
+                assert.equal(element.colorType, 'rgb');
+                assert.equal(element.value, 'rgb(255, 255, 255)');
+            });
+            
+            test('changeValue', function () {
+                var element = fixture('changeValue');
+                let changeEvt = new CustomEvent('change', {
+                    detail:{
+                        value: '#ff3a1e'
+                    }
+                });
+
+                element.addEventListener('change', function (evt) {
+                    element._onChangeValue(evt.detail.sourceEvent.detail.value);
+                    setTimeout(function(){
+                        assert.equal(element.value, '#ff3a1e');
+                    }, 500)
+                });
+
+                element._onClick();
+                element.$.inputColorHidden.dispatchEvent(changeEvt);
+            });
+            
+            test('clearInput', function () {
+                var element = fixture('clearInput');
+                let clickEvt = new Event('click');
+                
+                assert.equal(element.value, '#ffffff');
+
+                element.$.clearButton.dispatchEvent(clickEvt);
+
+                assert.equal(element.value, null)
+            });
+        });
+    </script>
+</body>
+
+</html>
