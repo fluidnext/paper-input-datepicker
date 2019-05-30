@@ -1,25 +1,22 @@
-# Paper Input COlor
+# Paper Input Date Picker
 
-`<paper-input-color></paper-input-color>` input web-component only for color, written in Polymer 3.
-
-<!-- See: [Documentation](https://www.webcomponents.org/element/paper-autocomplete),
-     [Demo](https://www.webcomponents.org/element/paper-autocomplete/demo/demo/index.html). -->
+`<paper-input-datepicker></paper-input-datepicker>` input web-component only for date, written in Polymer 3.
 
 ## Usage
 
 ### Installation
 ```
-npm install --save @fluidnext-polymer/paper-input-color
+npm install --save @fluidnext-polymer/paper-input-datepicker
 ```
 
 ### In an html file
 ```html
 <html>
   <head>
-    <script type="module" src="@fluid-next/paper-input-color/paper-input-color.js"></script>
+    <script type="module" src="@fluid-next/paper-input-datepicker/paper-input-datepicker.js"></script>
   </head>
   <body>
-    <paper-input-color></paper-input-color>
+    <paper-input-datepicker></paper-input-datepicker>
   </body>
 </html>
 ```
@@ -27,12 +24,12 @@ npm install --save @fluidnext-polymer/paper-input-color
 ### In a Polymer 3 element
 ```js
 import {PolymerElement, html} from '@polymer/polymer';
-import '@fluid-next/paper-input-color/paper-input-color';
+import '@fluid-next/paper-input-datepicker/paper-input-datepicker';
 
 class SampleElement extends PolymerElement {
   static get template() {
     return html`
-      <paper-input-color></paper-input-color>
+      <paper-input-datepicker></paper-input-datepicker>
     `;
   }
 }
