@@ -4,14 +4,16 @@ import {PaperInputBehavior} from '@polymer/paper-input/paper-input-behavior';
 
 import '@polymer/polymer/lib/elements/dom-repeat';
 import '@polymer/iron-input/iron-input';
-import '@polymer/iron-icon/iron-icon.js';
+import '@polymer/iron-icons/iron-icons';
 import '@polymer/iron-icons/hardware-icons';
+import '@polymer/iron-icon/iron-icon';
 
-import {FluidCalendarCustomStyle} from './fluid-calendar-style';
 
-import DateUtilities from '../date-utilities';
+import {FluidDatepickerCustomStyle} from './fluid-datepicker-style';
 
-class FluidCalendar extends mixinBehaviors([PaperInputBehavior], PolymerElement) {
+import '../fluid-calendar/fluid-calendar';
+
+class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElement) {
 
 	static get template() {
 		return html`
@@ -20,7 +22,7 @@ class FluidCalendar extends mixinBehaviors([PaperInputBehavior], PolymerElement)
                  @apply --paper-input-container-shared-input-style;
 			}
 		</style>
-		${FluidCalendarCustomStyle}
+		${FluidDatepickerCustomStyle}
 		<div class="control-container">
 			<paper-input-container on-click="_toggleDatepicker">
 				<div slot="label" for="datepicker-date">[[label]]</div>
@@ -32,33 +34,46 @@ class FluidCalendar extends mixinBehaviors([PaperInputBehavior], PolymerElement)
 		<div id="calendar" class="calendar-container" hidden>
 			<div class="toolbar">
 				<div class="row">
-					<div class="month previous">
+					<div class="month-selector" on-click="_previousMonth">
 						<iron-icon icon="hardware:keyboard-arrow-left">
 					</div>
 					<div class="date">[[date]]</div>
-					<div class="month next">
+					<div class="month-selector" on-click="_nextMonth">
 						<iron-icon icon="hardware:keyboard-arrow-right">
 					</div>
 				</div>
-				<div class="row"></div>
-				<div class="row"></div>
+				<div class="row">[[monthLabel]]</div>
+				<div class="row">due</div>
 			</div>
-			<div class="week-labels-row">
-				<template is="dom-repeat" items="[[weekdaysList]]" id="labels-row">
-					<div class="day-label-container">[[item]]</div>
-				</template>
+			<div class$="calendars [[monthClass]]">	
+				<fluid-calendar month="[[previousMonth]]"></fluid-calendar>
+				<fluid-calendar month="[[month]]"></fluid-calendar>
+				<fluid-calendar month="[[nextMonth]]"></fluid-calendar>
 			</div>
-			<template is="dom-repeat" items="{{table}}" as="week" index-as="weekIndex" id="weeks">
-				<div class="week-row">
-					<template is="dom-repeat" id="weekRow" items="{{week}}" as="day" index-as="dayIndex">
-						<div class$="day-container [[_getClass(day)]]" on-click="toggleSelection">
-							<div class="hovered">[[day.label]]</div>
-						</div>
-					</template>
-				</div>
-			</template>
+			
 		</div>
 		`;
+	}
+
+	constructor() {
+		super();
+		this.currentMonth = 1;
+	}
+
+	_previousMonth() {
+		this.currentMonth--;
+		if (this.currentMonth < 0) {
+			this.currentMonth = 0;
+		}
+		this.monthClass = ['previous', 'current', 'next'][this.currentMonth];
+	}
+
+	_nextMonth() {
+		this.currentMonth++;
+		if (this.currentMonth > 2) {
+			this.currentMonth = 2
+		}
+		this.monthClass = ['previous', 'current', 'next'][this.currentMonth];
 	}
 
 	_toggleDatepicker(e) {
@@ -73,53 +88,25 @@ class FluidCalendar extends mixinBehaviors([PaperInputBehavior], PolymerElement)
 
 	}
 
-	toggleSelection(e) {
-		this.selectedDate = e.model.get('day').date;
-	}
-
-	constructor() {
-		super();
-	}
-
 	ready() {
 		super.ready();
-		this.date = `${('00' + this.day).slice(-2)}/${('00' + this.month).slice(-2)}/${('0000' + this.year).slice(-4)}`;
-		this.dateUtils = new DateUtilities(this.day, this.month, this.year, this.format);
-		this.weekdaysList = ['Lu', 'Ma', 'Me', 'Gi', 'Ve', 'Sa', 'Do'];
-		this.table = this.dateUtils.month;
-	}
+		this.date = (new Date()).toLocaleString('it-IT');
 
-	_getClass(day) {
-		let classes = '';
-		classes += day.currentMonth ? '' : 'out-of-current-month ';
-		classes += day.weekday === 0 || day.weekday === 7 ? 'holyday ' : 'weekday ';
-		classes += day.today ? 'today ' : '';
-		return classes;
 	}
 
 	static get properties() {
 		return {
-			day: {
+			previousMonth: {
 				type: Number,
-				value: (new Date()).getDate()
+				value: (new Date()).getMonth()
 			},
 			month: {
 				type: Number,
 				value: (new Date()).getMonth() + 1
 			},
-			year: {
+			nextMonth: {
 				type: Number,
-				value: (new Date()).getFullYear()
-			},
-			format: {
-				type: String,
-				value: 'DD/MM/YYYY'
-			},
-			table: {
-				type: Array,
-				value() {
-					return [[]]
-				}
+				value: (new Date()).getMonth() + 2
 			},
 			label: {
 				type: String,
@@ -129,4 +116,4 @@ class FluidCalendar extends mixinBehaviors([PaperInputBehavior], PolymerElement)
 	}
 }
 
-window.customElements.define('fluid-calendar', FluidCalendar);
+window.customElements.define('fluid-datepicker', FluidDatepicker);

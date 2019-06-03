@@ -1,80 +1,35 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element';
 import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class';
-import {PaperInputBehavior} from '@polymer/paper-input/paper-input-behavior';
 
 import '@polymer/polymer/lib/elements/dom-repeat';
-import '@polymer/iron-input/iron-input';
-import '@polymer/iron-icon/iron-icon.js';
-import '@polymer/iron-icons/hardware-icons';
-
 import {FluidCalendarCustomStyle} from './fluid-calendar-style';
-
 import DateUtilities from '../date-utilities';
 
-class FluidCalendar extends mixinBehaviors([PaperInputBehavior], PolymerElement) {
+class FluidCalendar extends mixinBehaviors([], PolymerElement) {
 
 	static get template() {
 		return html`
-		<style>
-			iron-input > input {
-                 @apply --paper-input-container-shared-input-style;
-			}
-		</style>
 		${FluidCalendarCustomStyle}
-		<div class="control-container">
-			<paper-input-container on-click="_toggleDatepicker">
-				<div slot="label" for="datepicker-date">[[label]]</div>
-				<iron-input bind-value="[[selectedDate]]" slot="input">
-					<input type="text" readonly>
-				</iron-input>
-			</paper-input-container>
-		</div>
-		<div id="calendar" class="calendar-container" hidden>
-			<div class="toolbar">
-				<div class="row">
-					<div class="month previous">
-						<iron-icon icon="hardware:keyboard-arrow-left">
-					</div>
-					<div class="date">[[date]]</div>
-					<div class="month next">
-						<iron-icon icon="hardware:keyboard-arrow-right">
-					</div>
-				</div>
-				<div class="row"></div>
-				<div class="row"></div>
-			</div>
-			<div class="week-labels-row">
-				<template is="dom-repeat" items="[[weekdaysList]]" id="labels-row">
-					<div class="day-label-container">[[item]]</div>
-				</template>
-			</div>
-			<template is="dom-repeat" items="{{table}}" as="week" index-as="weekIndex" id="weeks">
-				<div class="week-row">
-					<template is="dom-repeat" id="weekRow" items="{{week}}" as="day" index-as="dayIndex">
-						<div class$="day-container [[_getClass(day)]]" on-click="toggleSelection">
-							<div class="hovered">[[day.label]]</div>
-						</div>
-					</template>
-				</div>
+		<div class="week-labels-row">
+			<template is="dom-repeat" items="[[weekdaysList]]" id="labels-row">
+				<div class="day-label-container">[[item]]</div>
 			</template>
 		</div>
+		<template is="dom-repeat" items="{{table}}" as="week" index-as="weekIndex" id="weeks">
+			<div class="week-row">
+				<template is="dom-repeat" id="weekRow" items="{{week}}" as="day" index-as="dayIndex">
+					<div class$="day-container [[_getClass(day)]]" on-click="toggleSelection">
+						<div class="hovered">[[day.label]]</div>
+					</div>
+				</template>
+			</div>
+		</template>
 		`;
-	}
-
-	_toggleDatepicker(e) {
-
-		if (this.$.calendar.hasAttribute('hidden')) {
-			this.$.calendar.removeAttribute('hidden');
-			this.label = 'Click to close datepicker';
-		} else {
-			this.$.calendar.setAttribute('hidden', true);
-			this.label = 'Click to open datepicker';
-		}
-
 	}
 
 	toggleSelection(e) {
 		this.selectedDate = e.model.get('day').date;
+		console.log(this.selectedDate);
 	}
 
 	constructor() {
@@ -120,10 +75,6 @@ class FluidCalendar extends mixinBehaviors([PaperInputBehavior], PolymerElement)
 				value() {
 					return [[]]
 				}
-			},
-			label: {
-				type: String,
-				value: 'Click to open datepicker'
 			}
 		};
 	}
