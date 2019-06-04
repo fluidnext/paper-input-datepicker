@@ -29,7 +29,6 @@ class FluidCalendar extends mixinBehaviors([], PolymerElement) {
 
 	toggleSelection(e) {
 		this.selectedDate = e.model.get('day').date;
-		console.log(this.selectedDate);
 	}
 
 	constructor() {

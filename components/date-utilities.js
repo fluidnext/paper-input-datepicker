@@ -34,7 +34,7 @@ export default class DateUtilities {
 	get month() {
 
 		let month = [];
-		let startOffset = this._start.day() - 1;
+		let startOffset = this._start.day() === 0 ? 6 : this._start.day() - 1;
 		let endOffset = 7 - this._end.day();
 
 		let start = this._start.subtract(startOffset, 'days');

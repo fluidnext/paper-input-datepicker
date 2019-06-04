@@ -6,6 +6,8 @@ export const FluidCalendarCustomStyle = html`
 		position: relative;
 		display: block;
 		z-index: 1;
+		min-width: 300px;
+		max-width: 300px;
 		width: 100%;
 		height: 100%;
 		box-sizing: border-box;

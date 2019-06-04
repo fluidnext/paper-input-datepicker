@@ -56,16 +56,25 @@ export const FluidDatepickerCustomStyle = html`
 	.calendar-container .calendars {
 		display: flex;
 		flex-direction: row;
-		width: 300%;
+		position: relative;
+		min-width: 900px;
+		width: 900px;
 		height: 75%;
+	}
+
+	.calendar-container .calendars fluid-calendar {
+		position: absolute;
 		transition: all .5s ease-in-out;
 	}
 
-	.calendar-container .calendars.previous {
-		transform: translateX(300px);
+	.move-right {
+		left: 600px;
 	}
-	.calendar-container .calendars.next {
-		transform: translateX(-300px);
+	.on-screen {
+		left: 300px;
+	}
+	.move-left {
+		left: 0px;
 	}
 	
 	[hidden] { display: none; }

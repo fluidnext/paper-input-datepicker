@@ -45,35 +45,77 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 				<div class="row">[[monthLabel]]</div>
 				<div class="row">due</div>
 			</div>
-			<div class$="calendars [[monthClass]]">	
-				<fluid-calendar month="[[previousMonth]]"></fluid-calendar>
-				<fluid-calendar month="[[month]]"></fluid-calendar>
-				<fluid-calendar month="[[nextMonth]]"></fluid-calendar>
+			<div class="calendars" id="holder">	
+				<fluid-calendar id="current" class="on-screen" month="[[month]]"></fluid-calendar>
 			</div>
-			
 		</div>
 		`;
 	}
 
 	constructor() {
 		super();
-		this.currentMonth = 1;
 	}
 
 	_previousMonth() {
-		this.currentMonth--;
-		if (this.currentMonth < 0) {
-			this.currentMonth = 0;
+		if (!this.enabled) {
+			return;
 		}
-		this.monthClass = ['previous', 'current', 'next'][this.currentMonth];
+		this.enabled = false;
+		this.monthShown--;
+		this.monthShown = this.monthShown < 1 ? 12 : this.monthShown;
+		this.monthLabel = this.monthLabels[this.monthShown - 1];
+
+		let previous = document.createElement('fluid-calendar');
+		previous.month = this.monthShown;
+		previous.classList.add('move-left');
+
+		this.$.holder.appendChild(previous);
+
+		let current = this.$.holder.querySelector('fluid-calendar#current');
+		current.classList.remove('on-screen');
+		current.classList.add('move-right');
+
+		setTimeout(() => {
+			previous.classList.remove('move-left');
+			previous.classList.add('on-screen');
+		});
+
+		setTimeout(() => {
+			current.remove();
+			previous.id = 'current';
+			this.enabled = true;
+		}, 500);
 	}
 
 	_nextMonth() {
-		this.currentMonth++;
-		if (this.currentMonth > 2) {
-			this.currentMonth = 2
+		if (!this.enabled) {
+			return;
 		}
-		this.monthClass = ['previous', 'current', 'next'][this.currentMonth];
+		this.enabled = false;
+		this.monthShown++;
+		this.monthShown = this.monthShown > 12 ? 1 : this.monthShown;
+		this.monthLabel = this.monthLabels[this.monthShown - 1];
+
+		let next = document.createElement('fluid-calendar');
+		next.month = this.monthShown;
+		next.classList.add('move-right');
+
+		this.$.holder.appendChild(next);
+
+		let current = this.$.holder.querySelector('fluid-calendar#current')
+		current.classList.remove('on-screen');
+		current.classList.add('move-left');
+
+		setTimeout(() => {
+			next.classList.remove('move-right');
+			next.classList.add('on-screen');
+		});
+
+		setTimeout(() => {
+			current.remove();
+			next.id = 'current';
+			this.enabled = true;
+		}, 500);
 	}
 
 	_toggleDatepicker(e) {
@@ -91,22 +133,17 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	ready() {
 		super.ready();
 		this.date = (new Date()).toLocaleString('it-IT');
-
+		this.enabled = true;
+		this.monthShown = this.month;
+		this.monthLabels = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
+		this.monthLabel = this.monthLabels[this.month - 1];
 	}
 
 	static get properties() {
 		return {
-			previousMonth: {
-				type: Number,
-				value: (new Date()).getMonth()
-			},
 			month: {
 				type: Number,
 				value: (new Date()).getMonth() + 1
-			},
-			nextMonth: {
-				type: Number,
-				value: (new Date()).getMonth() + 2
 			},
 			label: {
 				type: String,
