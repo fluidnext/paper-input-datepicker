@@ -46,7 +46,7 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 				<div class="row">due</div>
 			</div>
 			<div class="calendars" id="holder">	
-				<fluid-calendar id="current" class="on-screen" month="[[month]]"></fluid-calendar>
+				<fluid-calendar id="current" class="on-screen" month="[[month]]" year="[[year]]"></fluid-calendar>
 			</div>
 		</div>
 		`;
@@ -62,7 +62,10 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 		}
 		this.enabled = false;
 		this.monthShown--;
-		this.monthShown = this.monthShown < 1 ? 12 : this.monthShown;
+		if (this.monthShown < 1) {
+			this.monthShown = 12;
+			this.year--;
+		}
 		this.monthLabel = this.monthLabels[this.monthShown - 1];
 
 		let previous = document.createElement('fluid-calendar');
@@ -85,6 +88,8 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 			previous.id = 'current';
 			this.enabled = true;
 		}, 500);
+
+		this._updateDate();
 	}
 
 	_nextMonth() {
@@ -93,7 +98,10 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 		}
 		this.enabled = false;
 		this.monthShown++;
-		this.monthShown = this.monthShown > 12 ? 1 : this.monthShown;
+		if (this.monthShown > 12) {
+			this.monthShown = 1;
+			this.year++;
+		}
 		this.monthLabel = this.monthLabels[this.monthShown - 1];
 
 		let next = document.createElement('fluid-calendar');
@@ -116,6 +124,15 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 			next.id = 'current';
 			this.enabled = true;
 		}, 500);
+
+		this._updateDate();
+	}
+
+	_updateDate() {
+		let d = new Date();
+		d.setMonth(this.monthShown - 1);
+		d.setFullYear(this.year);
+		this.date = d.toLocaleDateString('it-IT');
 	}
 
 	_toggleDatepicker(e) {
@@ -132,11 +149,16 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 
 	ready() {
 		super.ready();
-		this.date = (new Date()).toLocaleString('it-IT');
+
+		if (!this.date) {
+			this.date = (new Date()).toLocaleDateString('it-IT');
+		}
+
 		this.enabled = true;
 		this.monthShown = this.month;
 		this.monthLabels = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
 		this.monthLabel = this.monthLabels[this.month - 1];
+		this.year = (new Date()).getFullYear();
 	}
 
 	static get properties() {
@@ -148,6 +170,9 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 			label: {
 				type: String,
 				value: 'Click to open datepicker'
+			},
+			date: {
+				type: String
 			}
 		};
 	}

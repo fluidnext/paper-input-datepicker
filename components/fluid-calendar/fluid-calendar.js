@@ -74,6 +74,9 @@ class FluidCalendar extends mixinBehaviors([], PolymerElement) {
 				value() {
 					return [[]]
 				}
+			},
+			selectedDate: {
+				type: Object
 			}
 		};
 	}
