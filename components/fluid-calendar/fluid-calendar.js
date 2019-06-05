@@ -1,101 +1,148 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element';
 import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class';
 
-import '@polymer/polymer/lib/elements/dom-repeat';
+import '@polymer/iron-icons/iron-icons';
+import '@polymer/iron-icons/hardware-icons';
+import '@polymer/iron-icon/iron-icon';
+
 import {FluidCalendarDefaultLocale} from './fluid-calendar-default-locale';
 import {FluidCalendarCustomStyle} from './fluid-calendar-style';
-import DateUtilities from '../date-utilities';
+
+import '../fluid-month-control/fluid-month-control';
 
 class FluidCalendar extends mixinBehaviors([], PolymerElement) {
 
 	static get template() {
 		return html`
-		${FluidCalendarCustomStyle}
-		<div class="week-labels-row">
-			<template is="dom-repeat" items="[[weekdaysList]]" id="labels-row">
-				<div class="day-label-container">[[item]]</div>
-			</template>
-		</div>
-		<template is="dom-repeat" items="{{table}}" as="week" index-as="weekIndex" id="weeks">
-			<div class="week-row">
-				<template is="dom-repeat" id="weekRow" items="{{week}}" as="day" index-as="dayIndex">
-					<div class$="day-container [[_getClass(day)]]" on-click="_setDate">
-						<div class="hovered">[[day.label]]</div>
+			${FluidCalendarCustomStyle}
+			<div class="toolbar">
+				<div class="row">
+					<div class="date">[[year]]</div>
+				</div>
+				<div class="row">
+					<div class="month-selector" on-click="_previousMonth">
+						<iron-icon icon="hardware:keyboard-arrow-left">
 					</div>
-				</template>
+					<div class="date">[[monthLabel]]</div>
+					<div class="month-selector" on-click="_nextMonth">
+						<iron-icon icon="hardware:keyboard-arrow-right">
+					</div>
+				</div>
+				<div class="row">[[value]]</div>
 			</div>
-		</template>
+			<div class="calendars" id="holder">
+				<fluid-month-control id="current" class="on-screen" month="[[month]]" year="[[year]]" value="{{value}}"></fluid-month-control>
+			</div>
 		`;
-	}
-
-	_setDate(e) {
-		if (!e.model.get('day').currentMonth) {
-			return;
-		}
-		this.value = e.model.get('day').date;
-		let days = this.shadowRoot.querySelectorAll('.day-container');
-		days.forEach(day => day.classList.remove('selected'));
-		delete this.selected;
-		for (let i = 0; i < days.length; i++) {
-			if (days[i].innerText === e.model.get('day').label && !days[i].classList.contains('out-of-current-month')) {
-				days[i].classList.add('selected');
-				this.selected = days[i];
-				break;
-			}
-		}
 	}
 
 	constructor() {
 		super();
+		this._locale = FluidCalendarDefaultLocale;
 	}
 
 	ready() {
 		super.ready();
-		this._locale = FluidCalendarDefaultLocale;
-		this.date = `${('00' + this.day).slice(-2)}/${('00' + this.month).slice(-2)}/${('0000' + this.year).slice(-4)}`;
-		this.dateUtils = new DateUtilities(this.day, this.month, this.year, this._locale.format);
-		this.weekdaysList = this._locale.labels.days;
-		this.table = this.dateUtils.month;
-	}
+		this.enabled = true;
+		this.monthShown = this.month;
+		this.monthLabels = this._locale.labels.months;
+		this.monthLabel = this.monthLabels[this.month - 1];
+		this.year = (new Date()).getFullYear();
 
-	_getClass(day) {
-		let classes = '';
-		classes += day.currentMonth ? '' : 'out-of-current-month ';
-		classes += day.weekday === 0 || day.weekday === 7 ? 'holyday ' : 'weekday ';
-		classes += day.today ? 'today ' : '';
-		return classes;
-	}
-
-	set locale(newLocale) {
-		this._locale = Object.assign(FluidCalendarDefaultLocale, newLocale);
+		this.$.current.addEventListener('value-changed', e => {
+			this.value = e.detail.value;
+		});
 	}
 
 	static get properties() {
 		return {
-			day: {
-				type: Number,
-				value: (new Date()).getDate()
-			},
 			month: {
 				type: Number,
 				value: (new Date()).getMonth() + 1
 			},
-			year: {
-				type: Number,
-				value: (new Date()).getFullYear()
-			},
-			table: {
-				type: Array,
-				value() {
-					return [[]]
-				}
-			},
 			value: {
 				type: String,
-				reflectToAttribute: true,
-				notify: true
+				notify: true,
+				reflectToAttribute: true
 			}
 		};
+	}
+
+	_previousMonth() {
+		if (!this.enabled) {
+			return;
+		}
+		this.enabled = false;
+		this.monthShown--;
+		if (this.monthShown < 1) {
+			this.monthShown = 12;
+			this.year--;
+		}
+		this.monthLabel = this.monthLabels[this.monthShown - 1];
+
+		let previous = document.createElement('fluid-month-control');
+		previous.month = this.monthShown;
+		previous.classList.add('move-left');
+		previous.addEventListener('value-changed', e => {
+			this.value = e.detail.value;
+		});
+
+		this.$.holder.appendChild(previous);
+
+		let current = this.$.holder.querySelector('fluid-month-control#current');
+		current.classList.remove('on-screen');
+		current.classList.add('move-right');
+
+		setTimeout(() => {
+			previous.classList.remove('move-left');
+			previous.classList.add('on-screen');
+		});
+
+		setTimeout(() => {
+			current.remove();
+			previous.id = 'current';
+			this.enabled = true;
+			this.$.current.addEventListener('value-changed', e => {
+				this.value = e.detail.value;
+			});
+		}, 500);
+	}
+
+	_nextMonth() {
+		if (!this.enabled) {
+			return;
+		}
+		this.enabled = false;
+		this.monthShown++;
+		if (this.monthShown > 12) {
+			this.monthShown = 1;
+			this.year++;
+		}
+		this.monthLabel = this.monthLabels[this.monthShown - 1];
+
+		let next = document.createElement('fluid-month-control');
+		next.month = this.monthShown;
+		next.classList.add('move-right');
+		next.addEventListener('value-changed', e => {
+			this.value = e.detail.value;
+		});
+
+		this.$.holder.appendChild(next);
+
+		let current = this.$.holder.querySelector('fluid-month-control#current')
+		current.classList.remove('on-screen');
+		current.classList.add('move-left');
+
+		setTimeout(() => {
+			next.classList.remove('move-right');
+			next.classList.add('on-screen');
+		});
+
+		setTimeout(() => {
+			current.remove();
+			next.id = 'current';
+			this.enabled = true;
+		}, 500);
 	}
 }
 

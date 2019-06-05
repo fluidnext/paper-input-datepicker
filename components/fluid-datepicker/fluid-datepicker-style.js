@@ -30,53 +30,6 @@ export const FluidDatepickerCustomStyle = html`
 		
 	}
 	
-	.calendar-container .toolbar {
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: column;
-		width: 100%; 
-		height: 25%;
-	}
-
-	.calendar-container .toolbar .row {
-		box-sizing: border-box;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-    	align-items: center;
-		width: 100%;
-		height: 33%;
-	}
-
-	.calendar-container .toolbar .row .month-selector {
-		font-weight: bolder;
-		font-size: 120%
-	}
-
-	.calendar-container .calendars {
-		display: flex;
-		flex-direction: row;
-		position: relative;
-		min-width: 900px;
-		width: 900px;
-		height: 75%;
-	}
-
-	.calendar-container .calendars fluid-calendar {
-		position: absolute;
-		transition: all .5s ease-in-out;
-	}
-
-	.move-right {
-		left: 600px;
-	}
-	.on-screen {
-		left: 300px;
-	}
-	.move-left {
-		left: 0px;
-	}
-
 	.underlay {
 		background-color: rgba(0,0,0,0);
 		position: fixed;

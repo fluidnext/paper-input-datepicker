@@ -1,7 +1,9 @@
 export const FluidCalendarDefaultLocale = {
 	locale: 'it-IT',
-	format: 'DD/MM/YYYY',
 	labels: {
+		open: 'Clicca per aprire il calendario',
+		close: 'Clicca per chiuder il calendario',
+		months: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
 		days: ['Lu', 'Ma', 'Me', 'Gi', 'Ve', 'Sa', 'Do']
 	}
-};
+}
