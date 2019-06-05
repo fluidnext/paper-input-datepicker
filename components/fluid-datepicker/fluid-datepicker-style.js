@@ -76,6 +76,15 @@ export const FluidDatepickerCustomStyle = html`
 	.move-left {
 		left: 0px;
 	}
+
+	.underlay {
+		background-color: rgba(0,0,0,0);
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 8000px;
+		height: 8000px;
+	}
 	
 	[hidden] { display: none; }
 </style>`;

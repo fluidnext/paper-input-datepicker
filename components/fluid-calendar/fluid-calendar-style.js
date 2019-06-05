@@ -23,10 +23,12 @@ export const FluidCalendarCustomStyle = html`
 	.day-container { box-sizing: border-box; width: 14.28%; height: 100%; text-align: center; line-height: 254%; font-size: 110%;}
 	.hovered:hover { width: 100%; height: 90%; box-sizing: border-box; background-color: #56f; color: white; margin-top: 5%; margin-bottom: 5%; line-height: 254%; border-radius: 50%; }
 	.day-container.holyday { color: red; font-weight: bold; }
-	.day-container.today { background-color: #cfdfef; }
-	.day-container.selected { background-color: red; }
+	
+	.selected .hovered { width: 100%; height: 90%; box-sizing: border-box; background-color: #56f; color: white; margin-top: 5%; margin-bottom: 5%; line-height: 254%; border-radius: 50%;  }
+	.today .hovered { width: 100%; height: 90%; box-sizing: border-box; background-color: #cfdfef; color: black; margin-top: 5%; margin-bottom: 5%; line-height: 254%; border-radius: 50%;  }
 	
 	.out-of-current-month { color: #d0d0d0;	}
+	.out-of-current-month.today .hovered { background-color: rgba(207,223,239, .6); }
 	.out-of-current-month.holyday { color: lightcoral; }
 	.out-of-current-month:hover { color: #d0d0d0; background-color: white; }
 	

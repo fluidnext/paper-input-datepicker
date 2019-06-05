@@ -25,15 +25,16 @@
 <body>
     <style></style>
     <div class="vertical-section-container centered">
-        <h3>Paper Input Date Picker</h3>
+        <h3>Fluid Input Date Picker</h3>
         <demo-snippet>
-            <!-- <paper-input-datepicker title="Pick a date"></paper-input-datepicker> -->
-            <fluid-datepicker></fluid-datepicker>
+            <fluid-datepicker value=""></fluid-datepicker>
         </demo-snippet>
     </div>
-
-
-
+    <script>
+        let datepicker = document.querySelector('fluid-datepicker');
+        datepicker.locale = {locale: 'en-US', labels: {months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']}};
+        datepicker.addEventListener('value-changed', e => {console.log(e.detail.value)});
+    </script>
 </body>
 
 </html>

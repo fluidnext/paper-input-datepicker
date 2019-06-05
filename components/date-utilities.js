@@ -35,17 +35,8 @@ export default class DateUtilities {
 
 		let month = [];
 		let startOffset = this._start.day() === 0 ? 6 : this._start.day() - 1;
-		let endOffset = 7 - this._end.day();
-
 		let start = this._start.subtract(startOffset, 'days');
 
-		// while (start.isSameOrBefore(end)) {
-		// 	month.push({
-		// 		date: start.format('DD/MM/YYYY'),
-		// 		day: start.day() === 0 ? 7 : start.day()
-		// 	});
-		// 	start.add(1, 'day');
-		// }
 		const me = this;
 		for (let ii = 0; ii < 42; ii++) {
 			month.push({
@@ -56,7 +47,7 @@ export default class DateUtilities {
 				day: start.format('DD'),
 				month: start.format('MM'),
 				year: start.format('YYYY'),
-				today: start.format('DD/MM/YYYY') === moment(me._date).format('DD/MM/YYYY')
+				today: start.format('DD/MM/YYYY') === moment(new Date()).format('DD/MM/YYYY')
 			});
 			start.add(1, 'day');
 		}
