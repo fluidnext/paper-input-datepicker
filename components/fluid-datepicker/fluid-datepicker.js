@@ -43,6 +43,7 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	constructor() {
 		super();
 		this._locale = FluidDatepickerDefaultLocale;
+		this.label = this._locale.labels.open || 'Click to open datepicker';
 	}
 
 	ready() {
