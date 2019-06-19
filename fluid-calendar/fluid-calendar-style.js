@@ -5,12 +5,14 @@ export const FluidCalendarCustomStyle = html`
 	:host {
 		position: relative;
 		display: block;
-		z-index: 1;
 		min-width: 300px;
 		max-width: 300px;
+		min-height: 300px;
 		width: 100%;
 		height: 100%;
 		box-sizing: border-box;
+		overflow: hidden;
+		@apply --fluid-calendar-custom-style;
 	}
 	
 	.toolbar {
@@ -19,6 +21,8 @@ export const FluidCalendarCustomStyle = html`
 		flex-direction: column;
 		width: 100%; 
 		height: 25%;
+		background-color: var(--accent-color, #ff0000);
+		color: white;
 	}
 
 	.toolbar .row {
@@ -64,6 +68,7 @@ export const FluidCalendarCustomStyle = html`
 		flex-direction: row;
 		position: relative;
 		min-width: 900px;
+		min-height: 300px;
 		width: 900px;
 		height: 75%;
 	}

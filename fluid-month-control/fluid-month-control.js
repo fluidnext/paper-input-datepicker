@@ -28,6 +28,20 @@ class FluidMonthControl extends mixinBehaviors([], PolymerElement) {
 		`;
 	}
 
+	constructor() {
+		super();
+	}
+
+	ready() {
+		super.ready();
+		this._locale = FluidMonthControlDefaultLocale;
+		this.date = `${('00' + this.day).slice(-2)}/${('00' + this.month).slice(-2)}/${('0000' + this.year).slice(-4)}`;
+		this.dateUtils = new DateUtilities(this.day, this.month, this.year, this._locale.format);
+		this.weekdaysList = this._locale.labels.days;
+		this.table = this.dateUtils.month;
+		this.value = this.date;
+	}
+
 	_setDate(e) {
 		if (!e.model.get('day').currentMonth) {
 			return;
@@ -43,19 +57,6 @@ class FluidMonthControl extends mixinBehaviors([], PolymerElement) {
 				break;
 			}
 		}
-	}
-
-	constructor() {
-		super();
-	}
-
-	ready() {
-		super.ready();
-		this._locale = FluidMonthControlDefaultLocale;
-		this.date = `${('00' + this.day).slice(-2)}/${('00' + this.month).slice(-2)}/${('0000' + this.year).slice(-4)}`;
-		this.dateUtils = new DateUtilities(this.day, this.month, this.year, this._locale.format);
-		this.weekdaysList = this._locale.labels.days;
-		this.table = this.dateUtils.month;
 	}
 
 	_getClass(day) {

@@ -5,10 +5,11 @@ export const FluidDatepickerCustomStyle = html`
 	:host {
 		position: relative;
 		display: block;
-		z-index: 1;
+		overflow: visible;
+		transform-style: flat;
 	}
 	.calendar-container {
-		position: fixed;
+		position: absolute;
 		box-sizing: border-box;
 
 		display: flex;
@@ -24,9 +25,10 @@ export const FluidDatepickerCustomStyle = html`
 		border: 1px solid #e0e0e0;
 		border-bottom: 2px solid #b0b0b0;
 		border-radius: 3px;
-		box-shadow: 0 2px 3px 1px #c0c0c0;
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 
 		background-color: white;
+		z-index: 10000;
 		
 	}
 	
@@ -37,6 +39,7 @@ export const FluidDatepickerCustomStyle = html`
 		left: 0;
 		width: 8000px;
 		height: 8000px;
+		z-index: 9999;
 	}
 	
 	[hidden] { display: none; }

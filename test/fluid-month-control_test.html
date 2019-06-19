@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+	<script src="../node_modules/mocha/mocha.js"></script>
+	<script src="../node_modules/chai/chai.js"></script>
+	<script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+	<script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+	<script type="module" src="../fluid-month-control/fluid-month-control.js"></script>
+</head>
+
+<body>
+	<test-fixture id="init-defaults">
+		<template>
+			<fluid-month-control></fluid-month-control>
+		</template>
+	</test-fixture>
+	<test-fixture id="change-month">
+		<template>
+			<fluid-month-control month="07"></fluid-month-control>
+		</template>
+	</test-fixture>
+	<test-fixture id="change-year">
+		<template>
+			<fluid-month-control year="2020"></fluid-month-control>
+		</template>
+	</test-fixture>
+	<test-fixture id="change-date">
+		<template>
+			<fluid-month-control day="25"></fluid-month-control>
+		</template>
+	</test-fixture>
+	<script>
+		suite('fluid-month-controls-test', function() {
+
+			test('init-defaults', function() {
+				let element = fixture('init-defaults');
+				assert.equal(element.value, '06/06/2019');
+			});
+			test('month-change', function() {
+				let element = fixture('change-month');
+				assert.equal(element.value, '06/07/2019');
+			});
+			test('year-change', function() {
+				let element = fixture('change-year');
+				assert.equal(element.value, '06/06/2020');
+			});
+			test('date-change', function() {
+				let element = fixture('change-date');
+				assert.equal(element.value, '25/06/2019');
+			});
+
+
+		});
+	</script>
+</body>
+
+</html>

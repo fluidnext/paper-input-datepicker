@@ -11,7 +11,9 @@
         import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
         import '@polymer/iron-demo-helpers/demo-snippet.js';
     </script>
-    <script type="module" src="../components/fluid-datepicker/fluid-datepicker.js"></script>
+    <script type="module" src="../fluid-datepicker/fluid-datepicker.js"></script>
+    <script type="module" src="../fluid-calendar/fluid-calendar.js"></script>
+    <script type="module" src="../fluid-month-control/fluid-month-control.js"></script>
     <custom-style>
         <style is="custom-style" include="demo-pages-shared-styles">
             body {
@@ -22,18 +24,30 @@
 </head>
 
 <body>
-    <style></style>
     <div class="vertical-section-container centered">
-        <h3>Fluid Input Date Picker</h3>
+        <h3>Fluid fluid-datepicker</h3>
         <demo-snippet>
-            <fluid-datepicker value=""></fluid-datepicker>
+            <template>
+                <fluid-datepicker></fluid-datepicker>
+            </template>
         </demo-snippet>
     </div>
-    <script>
-        let datepicker = document.querySelector('fluid-datepicker');
-        datepicker.locale = {locale: 'en-US', labels: {months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']}};
-        datepicker.addEventListener('value-changed', e => {console.log(e.detail.value)});
-    </script>
+    <div class="vertical-section-container centered">
+        <h3>Fluid Calendar</h3>
+        <demo-snippet>
+            <template>
+                <fluid-calendar year="2020" month="07"></fluid-calendar>
+            </template>
+        </demo-snippet>
+    </div>
+    <div class="vertical-section-container centered">
+        <h3>Fluid Month Control</h3>
+        <demo-snippet>
+            <template>
+                <fluid-month-control year="2020" month="02"></fluid-month-control>
+            </template>
+        </demo-snippet>
+    </div>
 </body>
 
 </html>
