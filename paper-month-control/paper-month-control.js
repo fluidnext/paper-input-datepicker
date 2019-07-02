@@ -2,15 +2,15 @@ import {html, PolymerElement} from '@polymer/polymer/polymer-element';
 import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class';
 
 import '@polymer/polymer/lib/elements/dom-repeat';
-import {FluidMonthControlDefaultLocale} from './fluid-month-control-default-locale';
-import {FluidMonthControlCustomStyle} from './fluid-month-control-style';
+import {PaperMonthControlDefaultLocale} from './paper-month-control-default-locale';
+import {PaperMonthControlCustomStyle} from './paper-month-control-style';
 import DateUtilities from '../date-utilities';
 
-class FluidMonthControl extends mixinBehaviors([], PolymerElement) {
+class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 
 	static get template() {
 		return html`
-		${FluidMonthControlCustomStyle}
+		${PaperMonthControlCustomStyle}
 		<div class="week-labels-row">
 			<template is="dom-repeat" items="[[weekdaysList]]" id="labels-row">
 				<div class="day-label-container">[[item]]</div>
@@ -34,7 +34,7 @@ class FluidMonthControl extends mixinBehaviors([], PolymerElement) {
 
 	ready() {
 		super.ready();
-		this._locale = FluidMonthControlDefaultLocale;
+		this._locale = PaperMonthControlDefaultLocale;
 		this.date = `${('00' + this.day).slice(-2)}/${('00' + this.month).slice(-2)}/${('0000' + this.year).slice(-4)}`;
 		this.dateUtils = new DateUtilities(this.day, this.month, this.year, this._locale.format);
 		this.weekdaysList = this._locale.labels.days;
@@ -68,7 +68,7 @@ class FluidMonthControl extends mixinBehaviors([], PolymerElement) {
 	}
 
 	set locale(newLocale) {
-		this._locale = Object.assign(FluidMonthControlDefaultLocale, newLocale);
+		this._locale = Object.assign(PaperMonthControlDefaultLocale, newLocale);
 	}
 
 	static get properties() {
@@ -100,4 +100,4 @@ class FluidMonthControl extends mixinBehaviors([], PolymerElement) {
 	}
 }
 
-window.customElements.define('fluid-month-control', FluidMonthControl);
+window.customElements.define('paper-month-control', PaperMonthControl);

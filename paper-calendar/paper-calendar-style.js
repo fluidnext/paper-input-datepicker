@@ -1,6 +1,6 @@
 import {html} from '@polymer/polymer/polymer-element';
 
-export const FluidCalendarCustomStyle = html`
+export const PaperCalendarCustomStyle = html`
 <style>
 	:host {
 		position: relative;
@@ -12,7 +12,7 @@ export const FluidCalendarCustomStyle = html`
 		height: 100%;
 		box-sizing: border-box;
 		overflow: hidden;
-		@apply --fluid-calendar-custom-style;
+		@apply --paper-calendar-custom-style;
 	}
 	
 	.toolbar {
@@ -73,7 +73,7 @@ export const FluidCalendarCustomStyle = html`
 		height: 75%;
 	}
 
-	.calendars fluid-month-control {
+	.calendars paper-month-control {
 		position: absolute;
 		transition: all .5s ease-in-out;
 	}

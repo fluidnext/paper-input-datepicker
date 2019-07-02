@@ -1,6 +1,6 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element';
 
-export const FluidDatepickerCustomStyle = html`
+export const PaperDatepickerCustomStyle = html`
 <style>
 	:host {
 		position: relative;

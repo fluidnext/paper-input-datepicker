@@ -1,6 +1,6 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element';
 
-export const FluidMonthControlCustomStyle = html`
+export const PaperMonthControlCustomStyle = html`
 <style>
 	:host {
 		position: relative;

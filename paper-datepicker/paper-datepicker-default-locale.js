@@ -1,4 +1,4 @@
-export const FluidCalendarDefaultLocale = {
+export const PaperDatepickerDefaultLocale = {
 	locale: 'it-IT',
 	labels: {
 		open: 'Clicca per aprire il calendario',

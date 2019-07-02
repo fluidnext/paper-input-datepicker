@@ -5,16 +5,16 @@ import '@polymer/iron-icons/iron-icons';
 import '@polymer/iron-icons/hardware-icons';
 import '@polymer/iron-icon/iron-icon';
 
-import {FluidCalendarDefaultLocale} from './fluid-calendar-default-locale';
-import {FluidCalendarCustomStyle} from './fluid-calendar-style';
+import {PaperCalendarDefaultLocale} from './paper-calendar-default-locale';
+import {PaperCalendarCustomStyle} from './paper-calendar-style';
 
-import '../fluid-month-control/fluid-month-control';
+import '../paper-month-control/paper-month-control';
 
-class FluidCalendar extends mixinBehaviors([], PolymerElement) {
+class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 
 	static get template() {
 		return html`
-			${FluidCalendarCustomStyle}
+			${PaperCalendarCustomStyle}
 			<div class="toolbar">
 				<div class="row">
 					<div class="date">[[year]]</div>
@@ -31,14 +31,14 @@ class FluidCalendar extends mixinBehaviors([], PolymerElement) {
 				<div class="row">[[value]]</div>
 			</div>
 			<div class="calendars" id="holder">
-				<fluid-month-control id="current" class="on-screen" month="[[month]]" year="[[year]]" value="{{value}}"></fluid-month-control>
+				<paper-month-control id="current" class="on-screen" month="[[month]]" year="[[year]]" value="{{value}}"></paper-month-control>
 			</div>
 		`;
 	}
 
 	constructor() {
 		super();
-		this._locale = FluidCalendarDefaultLocale;
+		this._locale = PaperCalendarDefaultLocale;
 	}
 
 	ready() {
@@ -80,7 +80,7 @@ class FluidCalendar extends mixinBehaviors([], PolymerElement) {
 		}
 		this.monthLabel = this.monthLabels[this.monthShown - 1];
 
-		let previous = document.createElement('fluid-month-control');
+		let previous = document.createElement('paper-month-control');
 		previous.month = this.monthShown;
 		previous.classList.add('move-left');
 		previous.addEventListener('value-changed', e => {
@@ -89,7 +89,7 @@ class FluidCalendar extends mixinBehaviors([], PolymerElement) {
 
 		this.$.holder.appendChild(previous);
 
-		let current = this.$.holder.querySelector('fluid-month-control#current');
+		let current = this.$.holder.querySelector('paper-month-control#current');
 		current.classList.remove('on-screen');
 		current.classList.add('move-right');
 
@@ -120,7 +120,7 @@ class FluidCalendar extends mixinBehaviors([], PolymerElement) {
 		}
 		this.monthLabel = this.monthLabels[this.monthShown - 1];
 
-		let next = document.createElement('fluid-month-control');
+		let next = document.createElement('paper-month-control');
 		next.month = this.monthShown;
 		next.classList.add('move-right');
 		next.addEventListener('value-changed', e => {
@@ -129,7 +129,7 @@ class FluidCalendar extends mixinBehaviors([], PolymerElement) {
 
 		this.$.holder.appendChild(next);
 
-		let current = this.$.holder.querySelector('fluid-month-control#current')
+		let current = this.$.holder.querySelector('paper-month-control#current')
 		current.classList.remove('on-screen');
 		current.classList.add('move-left');
 
@@ -146,4 +146,4 @@ class FluidCalendar extends mixinBehaviors([], PolymerElement) {
 	}
 }
 
-window.customElements.define('fluid-calendar', FluidCalendar);
+window.customElements.define('paper-calendar', PaperCalendar);

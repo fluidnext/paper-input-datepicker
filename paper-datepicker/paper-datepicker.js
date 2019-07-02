@@ -9,19 +9,19 @@ import '@polymer/iron-icons/iron-icons';
 import '@polymer/iron-icons/hardware-icons';
 import '@polymer/iron-icon/iron-icon';
 
-import {FluidDatepickerDefaultLocale} from './fluid-datepicker-default-locale';
-import {FluidDatepickerCustomStyle} from './fluid-datepicker-style';
+import {PaperDatepickerDefaultLocale} from './paper-datepicker-default-locale';
+import {PaperDatepickerCustomStyle} from './paper-datepicker-style';
 
-import '../fluid-calendar/fluid-calendar';
+import '../paper-calendar/paper-calendar';
 
-class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElement) {
+class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElement) {
 
 	static get template() {
 		return html`
 		<style>
 			iron-input > input { @apply --paper-input-container-shared-input-style; }
 		</style>
-		${FluidDatepickerCustomStyle}
+		${PaperDatepickerCustomStyle}
 		<div class="underlay" id="underlay" hidden on-click="_toggleDatepicker"></div>
 		<div class="control-container">
 			<paper-input-container on-click="_toggleDatepicker">
@@ -35,14 +35,14 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 			</paper-input-container>
 		</div>
 		<div id="calendar" class="calendar-container" hidden>
-			<fluid-calendar value="{{value}}"></fluid-calendar>
+			<paper-calendar value="{{value}}"></paper-calendar>
 		</div>
 		`;
 	}
 
 	constructor() {
 		super();
-		this._locale = FluidDatepickerDefaultLocale;
+		this._locale = PaperDatepickerDefaultLocale;
 		this.label = this._locale.labels.open || 'Click to open datepicker';
 	}
 
@@ -81,7 +81,7 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	}
 
 	set locale(newLocale) {
-		this._locale = Object.assign(FluidDatepickerDefaultLocale, newLocale);
+		this._locale = Object.assign(PaperDatepickerDefaultLocale, newLocale);
 	}
 
 
@@ -101,4 +101,4 @@ class FluidDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	}
 }
 
-window.customElements.define('fluid-datepicker', FluidDatepicker);
+window.customElements.define('paper-datepicker', PaperDatepicker);
