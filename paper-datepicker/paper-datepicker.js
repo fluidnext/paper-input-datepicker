@@ -49,9 +49,10 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	ready() {
 		super.ready();
 
-		if (!this.value) {
-			this.value = (new Date()).toLocaleDateString(this._locale.locale);
-		}
+		// Initialized in `ready()` function from paper-month-control.js
+		// if (!this.value) {
+		// 	this.value = (new Date()).toLocaleDateString(this._locale.locale);
+		// }
 	}
 
 	_toggleDatepicker(e) {

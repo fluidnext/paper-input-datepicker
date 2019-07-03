@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script type="module" src="../paper-calendar/paper-calendar.js"></script>
+    <script>
+        import('../node_modules/sinon/pkg/sinon-esm.js').then((module) => {
+            window.useFakeTimers = module.useFakeTimers;
+        });
+    </script>
+</head>
+
+<body>
+    <test-fixture id="initDefaults">
+        <template>
+            <paper-calendar></paper-calendar>
+        </template>
+    </test-fixture>
+    <test-fixture id="monthChange">
+        <template>
+            <paper-calendar month="07"></paper-calendar>
+        </template>
+    </test-fixture>
+    <test-fixture id="yearChangePrevious">
+        <template>
+            <paper-calendar month="01"></paper-calendar>
+        </template>
+    </test-fixture>
+    <test-fixture id="yearChangeNext">
+        <template>
+            <paper-calendar month="12"></paper-calendar>
+        </template>
+    </test-fixture>
+    <script>
+        let a = new Date();
+        let currentDate = a.toLocaleString('it-IT').split(',')[0].split('/').map(c => (c.length < 2 ? '0' : '') + c).join('/');
+
+        suite('paper-month-controls-test', function () {
+
+            test('Test Init Default options', function () {
+                let element = fixture('initDefaults');
+                assert.equal(element.value, currentDate);
+            });
+            test('Test Month Changed (Previous Month)', function () {
+                let element = fixture('monthChange');
+                element._previousMonth();
+                assert.equal(parseInt(element.value.split('/')[1]), 6);
+            });
+            test('Test Month Changed (Next Month)', function () {
+                let element = fixture('monthChange');
+                element._nextMonth();
+                assert.equal(parseInt(element.value.split('/')[1]), 8);
+            });
+            test('Test Year Change (Previous)', function () {
+                let element = fixture('yearChangePrevious');
+                element._previousMonth();
+                assert.equal(parseInt(element.value.split('/')[1]), 12);
+                assert.equal(parseInt(element.value.split('/')[2]), parseInt(currentDate.split('/')[2]) - 1);
+            });
+            test('Test Year Change (Next)', function () {
+                let element = fixture('yearChangeNext');
+                element._nextMonth();
+                assert.equal(parseInt(element.value.split('/')[1]), 1);
+                assert.equal(parseInt(element.value.split('/')[2]), parseInt(currentDate.split('/')[2]) + 1);
+            });
+            test('Test !this.enable (Previous)', function () {
+                let clock = window.useFakeTimers();
+                let element = fixture('initDefaults');
+                element._previousMonth();
+                element._nextMonth();
+                element._previousMonth();
+                clock.tick(500);
+                assert.equal(parseInt(element.value.split('/')[1]), parseInt(currentDate.split('/')[1]) - 1);
+            });
+            test('Test !this.enable (Next)', function () {
+                let clock = window.useFakeTimers();
+                let element = fixture('initDefaults');
+                element._nextMonth();
+                element._previousMonth();
+                element._nextMonth();
+                clock.tick(500);
+                assert.equal(parseInt(element.value.split('/')[1]), parseInt(currentDate.split('/')[1]) + 1);
+            });
+        });
+    </script>
+</body>
+
+</html>

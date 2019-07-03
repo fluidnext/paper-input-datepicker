@@ -1,3 +1,7 @@
+[![Coverage Status](https://coveralls.io/repos/github/fluidnext/paper-input-datepicker/badge.svg?branch=master)](https://coveralls.io/github/fluidnext/paper-input-datepicker?branch=master)
+[![Published on NPM](https://img.shields.io/npm/v/%40fluidnext-polymer%2Fpaper-input-datepicker.svg)](https://www.npmjs.com/package/%40fluidnext-polymer%2Fpaper-input-datepicker)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/%40fluidnext-polymer%2Fpaper-input-datepicker)
+
 # Paper Input Date Picker
 
 `<paper-input-datepicker></paper-input-datepicker>` input web-component only for date, written in Polymer 3.

@@ -84,7 +84,9 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 		previous.month = this.monthShown;
 		previous.classList.add('move-left');
 		previous.addEventListener('value-changed', e => {
-			this.value = e.detail.value;
+			let eventDate = e.detail.value.split('/');
+			eventDate[2] = this.year;
+			this.value = eventDate.join('/');
 		});
 
 		this.$.holder.appendChild(previous);
@@ -93,7 +95,7 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 		current.classList.remove('on-screen');
 		current.classList.add('move-right');
 
-		setTimeout(() => {
+		requestAnimationFrame(() => {
 			previous.classList.remove('move-left');
 			previous.classList.add('on-screen');
 		});
@@ -102,9 +104,11 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 			current.remove();
 			previous.id = 'current';
 			this.enabled = true;
-			this.$.current.addEventListener('value-changed', e => {
-				this.value = e.detail.value;
-			});
+			// this.$.current.addEventListener('value-changed', e => {
+			// 	let eventDate = e.detail.value.split('/');
+			// 	eventDate[2] = this.year;
+			// 	this.value = eventDate.join('/');
+			// });
 		}, 500);
 	}
 
@@ -124,7 +128,9 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 		next.month = this.monthShown;
 		next.classList.add('move-right');
 		next.addEventListener('value-changed', e => {
-			this.value = e.detail.value;
+			let eventDate = e.detail.value.split('/');
+			eventDate[2] = this.year;
+			this.value = eventDate.join('/');
 		});
 
 		this.$.holder.appendChild(next);
@@ -133,7 +139,11 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 		current.classList.remove('on-screen');
 		current.classList.add('move-left');
 
-		setTimeout(() => {
+		// setTimeout(() => {
+		// 	next.classList.remove('move-right');
+		// 	next.classList.add('on-screen');
+		// });
+		requestAnimationFrame(() => {
 			next.classList.remove('move-right');
 			next.classList.add('on-screen');
 		});

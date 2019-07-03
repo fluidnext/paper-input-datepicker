@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
+    <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
+    <script type="module" src="../paper-datepicker/paper-datepicker.js"></script>
+</head>
+
+<body>
+    <test-fixture id="initDefaults">
+        <template>
+            <paper-datepicker></paper-datepicker>
+        </template>
+    </test-fixture>
+    <script>
+        let a = new Date();
+        let currentDate = a.toLocaleString('it-IT').split(',')[0].split('/').map(c => (c.length < 2 ? '0' : '') + c).join('/');
+
+        suite('paper-input-datepicker-test', function () {
+            test('init-defaults', function () {
+                let element = fixture('initDefaults');
+                assert.equal(element.value, currentDate);
+            });
+            test('open and close paper-input-datepicker', function(){
+                let element = fixture('initDefaults');
+                let evt = new CustomEvent('click');
+
+                // Open Calendar
+                assert.equal(element.$.calendar.hasAttribute('hidden'), true, 'input container is hidden');
+                element.shadowRoot.querySelector('paper-input-container').dispatchEvent(evt);
+                assert.equal(element.$.calendar.hasAttribute('hidden'), false, 'input container should be shown');
+
+                // Close Calendar
+                assert.equal(element.$.underlay.hasAttribute('hidden'), false, 'underlay is shown');
+                element.shadowRoot.querySelector('#underlay').dispatchEvent(evt);
+                assert.equal(element.$.underlay.hasAttribute('hidden'), true, 'underlay should be hidden');
+            });
+        });
+    </script>
+</body>
+
+</html>

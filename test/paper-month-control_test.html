@@ -12,47 +12,32 @@
 </head>
 
 <body>
-	<test-fixture id="init-defaults">
+	<test-fixture id="initDefaults">
 		<template>
 			<paper-month-control></paper-month-control>
 		</template>
 	</test-fixture>
-	<test-fixture id="change-month">
-		<template>
-			<paper-month-control month="07"></paper-month-control>
-		</template>
-	</test-fixture>
-	<test-fixture id="change-year">
-		<template>
-			<paper-month-control year="2020"></paper-month-control>
-		</template>
-	</test-fixture>
-	<test-fixture id="change-date">
-		<template>
-			<paper-month-control day="25"></paper-month-control>
-		</template>
-	</test-fixture>
 	<script>
+		let a = new Date();
+		let currentDate = a.toLocaleString('it-IT').split(',')[0].split('/').map(c => (c.length < 2 ? '0' : '') + c).join('/');
+
 		suite('paper-month-controls-test', function() {
 
-			test('init-defaults', function() {
-				let element = fixture('init-defaults');
-				assert.equal(element.value, '01/07/2019');
+			test('initDefaults', function() {
+				let element = fixture('initDefaults');
+				assert.equal(element.value, currentDate);
 			});
-			test('month-change', function() {
-				let element = fixture('change-month');
-				assert.equal(element.value, '01/07/2019');
-			});
-			test('year-change', function() {
-				let element = fixture('change-year');
-				assert.equal(element.value, '01/07/2020');
-			});
-			test('date-change', function() {
-				let element = fixture('change-date');
-				assert.equal(element.value, '25/07/2019');
-			});
+			
+			test('Set Date on Calendar', function() {
+				let element = fixture('initDefaults');
 
+				console.warn(element.$.weeks);
+				console.warn(element.$.weeks.getElementsByClassName('week-row'));
 
+				console.warn(element);
+				element.setAttribute('month', 6);
+				console.warn(element);
+			});
 		});
 	</script>
 </body>

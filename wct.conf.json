@@ -1,7 +1,9 @@
 {
     "npm": true,
     "suites": [
-        "test/paper-month-control_test.html"
+        "test/paper-month-control_test.html",
+        "test/paper-input-datepicker_test.html",
+        "test/paper-calendar_test.html"
     ],
     "plugins": {
         "local": {
