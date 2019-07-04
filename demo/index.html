@@ -7,17 +7,29 @@
 
     <title>Paper Input Date Picker</title>
 
-    <script type="module">
-        import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
-        import '@polymer/iron-demo-helpers/demo-snippet.js';
-    </script>
     <script type="module" src="../paper-datepicker/paper-datepicker.js"></script>
     <script type="module" src="../paper-calendar/paper-calendar.js"></script>
     <script type="module" src="../paper-month-control/paper-month-control.js"></script>
+    <script type="module">
+        import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+        import '@polymer/iron-demo-helpers/demo-snippet.js';
+        import '@polymer/paper-button/paper-button';
+        import '../icons/paper-input-datepicker-icons.js';
+    </script>
     <custom-style>
         <style is="custom-style" include="demo-pages-shared-styles">
             body {
                 font-family: roboto;
+            }
+
+            paper-button {
+                background-color: green;
+            }
+
+            .button-validation {
+                padding-top: 10px;
+                display: flex;
+                justify-content: flex-end;
             }
         </style>
     </custom-style>
@@ -25,12 +37,62 @@
 
 <body>
     <div class="vertical-section-container centered">
-        <h3>Fluid paper-datepicker</h3>
+        <h1>Fluid paper-datepicker Example</h1>
+    </div>
+    <div class="vertical-section-container centered">
+        <h3>Fluid paper-datepicker init</h3>
         <demo-snippet>
             <template>
-                <paper-datepicker></paper-datepicker>
+                <paper-datepicker label="Select Date"></paper-datepicker>
             </template>
         </demo-snippet>
+    </div>
+    <!-- set Value from attribute, TODO
+        <div class="vertical-section-container centered">
+        <h3>Fluid paper-datepicker init</h3>
+        <demo-snippet>
+            <template>
+                <paper-datepicker label="Select Date" value="03/08/2019"></paper-datepicker>
+            </template>
+        </demo-snippet>
+    </div> -->
+    <div class="vertical-section-container centered">
+        <h3>The label can have different floating states</h3>
+        <demo-snippet>
+            <template>
+                <paper-datepicker label="This label is always floating" always-float-label></paper-datepicker>
+                <paper-datepicker label="This label never floats" no-label-float></paper-datepicker>
+            </template>
+        </demo-snippet>
+    </div>
+    <div class="vertical-section-container centered">
+        <h3>Paper Datepicker disable</h3>
+        <demo-snippet>
+            <template>
+                <paper-datepicker label="Open Calendar" disabled></paper-datepicker>
+            </template>
+        </demo-snippet>
+    </div>
+    <!-- NOT WORKING WHY? -->
+    <div class="vertical-section-container centered">
+        <h3>Paper Datepicker error</h3>
+        <demo-snippet>
+            <template>
+                <paper-datepicker label="Select Day" color-type="rgb" required auto-validate error-message="needs some color!"></paper-datepicker>
+                <paper-datepicker id="inputForValidation" required label="This input is manually validated" error-message="letters only!"></paper-datepicker>
+                <div class="button-validation">
+                    <paper-button onclick="validate()">Validate!</paper-button>
+                </div>
+                <script>
+                    function validate() {
+                        document.getElementById('inputForValidation').validate();
+                    }
+                </script>
+            </template>
+        </demo-snippet>
+    </div>
+    <div class="vertical-section-container centered">
+        <h1>Other Components</h1>
     </div>
     <div class="vertical-section-container centered">
         <h3>Fluid Paper Calendar</h3>

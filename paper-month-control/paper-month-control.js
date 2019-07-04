@@ -39,7 +39,7 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 		this.dateUtils = new DateUtilities(this.day, this.month, this.year, this._locale.format);
 		this.weekdaysList = this._locale.labels.days;
 		this.table = this.dateUtils.month;
-		this.value = this.date;
+		// this.value = this.date;
 	}
 
 	_setDate(e) {

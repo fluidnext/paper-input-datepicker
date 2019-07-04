@@ -1,13 +1,10 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element';
 import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class';
 
-import '@polymer/iron-icons/iron-icons';
-import '@polymer/iron-icons/hardware-icons';
-import '@polymer/iron-icon/iron-icon';
-
 import {PaperCalendarDefaultLocale} from './paper-calendar-default-locale';
 import {PaperCalendarCustomStyle} from './paper-calendar-style';
 
+import '@polymer/iron-icon/iron-icon';
 import '../paper-month-control/paper-month-control';
 
 class PaperCalendar extends mixinBehaviors([], PolymerElement) {
@@ -21,11 +18,11 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 				</div>
 				<div class="row">
 					<div class="month-selector" on-click="_previousMonth">
-						<iron-icon icon="hardware:keyboard-arrow-left">
+						<iron-icon icon="paper-input-datepicker:keyboard-arrow-left">
 					</div>
 					<div class="date">[[monthLabel]]</div>
 					<div class="month-selector" on-click="_nextMonth">
-						<iron-icon icon="hardware:keyboard-arrow-right">
+						<iron-icon icon="paper-input-datepicker:keyboard-arrow-right">
 					</div>
 				</div>
 				<div class="row">[[value]]</div>
