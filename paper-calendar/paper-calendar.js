@@ -7,6 +7,9 @@ import {PaperCalendarCustomStyle} from './paper-calendar-style';
 import '@polymer/iron-icon/iron-icon';
 import '../paper-month-control/paper-month-control';
 
+/**
+ * @demo demo/paper-calendar_demo.html Paper-Calendar
+ */
 class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 
 	static get template() {

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Paper Month Control</title>
+
+    <script type="module" src="../paper-month-control/paper-month-control.js"></script>
+    <script type="module">
+        import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+        import '@polymer/iron-demo-helpers/demo-snippet.js';
+    </script>
+    <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles">
+            body {
+                font-family: roboto;
+            }
+        </style>
+    </custom-style>
+</head>
+
+<body>
+    <div class="vertical-section-container centered">
+        <h1>Month Control</h1>
+    </div>
+    <div class="vertical-section-container centered">
+        <h3>Base Paper Month Control</h3>
+        <demo-snippet>
+            <template>
+                <paper-month-control year="2020" month="02"></paper-month-control>
+            </template>
+        </demo-snippet>
+    </div>
+    <div class="vertical-section-container centered">
+        <h3>Paper Month Control Custom Style</h3>
+        <demo-snippet>
+            <template>
+                <custom-style>
+                    <style is="custom-style" include="demo-pages-shared-styles">
+                        paper-month-control#customStyle {
+                            --selected-today-background-color: #9754C8;
+                
+                            --today-style: {
+                                background-color: rgba(255, 73, 77, .6);
+                                color: white;
+                            };
+                
+                            --selected-date-style: {
+                                background-color: #ff9;
+                                color: black;
+                            };
+                
+                            --holyday-style: {
+                                color: blue;
+                            };
+                        }
+                    </style>
+                </custom-style>
+                <paper-month-control id="customStyle" month="07"></paper-month-control>
+            </template>
+        </demo-snippet>
+    </div>
+</body>
+
+</html>

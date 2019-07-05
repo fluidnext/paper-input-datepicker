@@ -12,7 +12,6 @@ export const PaperCalendarCustomStyle = html`
 		height: 100%;
 		box-sizing: border-box;
 		overflow: hidden;
-		@apply --paper-calendar-custom-style;
 	}
 	
 	.toolbar {
@@ -23,6 +22,7 @@ export const PaperCalendarCustomStyle = html`
 		height: 25%;
 		background-color: var(--accent-color, #ff0000);
 		color: white;
+		@apply --calendar-toolbar-style;
 	}
 
 	.toolbar .row {

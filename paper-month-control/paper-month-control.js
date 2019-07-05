@@ -6,6 +6,9 @@ import {PaperMonthControlDefaultLocale} from './paper-month-control-default-loca
 import {PaperMonthControlCustomStyle} from './paper-month-control-style';
 import DateUtilities from '../date-utilities';
 
+/**
+ * @demo demo/paper-month_demo.html Paper-Month-Control
+ */
 class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 
 	static get template() {

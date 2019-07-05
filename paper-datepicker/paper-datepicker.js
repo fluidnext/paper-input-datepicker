@@ -12,6 +12,10 @@ import {PaperDatepickerCustomStyle} from './paper-datepicker-style';
 
 import '../paper-calendar/paper-calendar';
 
+/**
+ * @demo demo/index.html Paper-Datepicker
+ */
+
 class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElement) {
 
 	static get template() {

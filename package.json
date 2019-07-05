@@ -3,6 +3,7 @@
   "version": "3.0.0",
   "description": "input web-component only for color, written in Polymer 3",
   "scripts": {
+    "analyze": "polymer analyze -i paper-datepicker/paper-datepicker.js paper-calendar/paper-calendar.js paper-month-control/paper-month-control.js >> analysis.json",
     "test": "polymer test",
     "test-chrome": "polymer test -l chrome",
     "test-safari": "polymer test -l safari",
