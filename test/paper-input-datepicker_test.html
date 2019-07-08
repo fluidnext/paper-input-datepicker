@@ -6,6 +6,7 @@
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/mocha/mocha.js"></script>
     <script src="../node_modules/chai/chai.js"></script>
+    <script src="../node_modules/chai-spies/chai-spies.js"></script>
     <script src="../node_modules/wct-mocha/wct-mocha.js"></script>
     <script src="../node_modules/@polymer/test-fixture/test-fixture.js"></script>
     <script type="module" src="../paper-datepicker/paper-datepicker.js"></script>
@@ -21,6 +22,8 @@
         let a = new Date();
         let currentDate = a.toLocaleString('it-IT').split(',')[0].split('/').map(c => (c.length < 2 ? '0' : '') + c).join('/');
 
+        chai.use(spies);
+
         suite('paper-input-datepicker-test', function () {
             test('init-defaults', function () {
                 let element = fixture('initDefaults');
@@ -29,6 +32,24 @@
             test('open and close paper-input-datepicker', function(){
                 let element = fixture('initDefaults');
                 let evt = new CustomEvent('click');
+
+                let beforeOpen = false;
+                let open = false;
+                let beforeClose = false;
+                let close = false;
+
+                element.$.calendar.on('datepicker-before-open', function(evt) {
+                    beforeOpen = true;
+                });
+                element.$.calendar.on('datepicker-open', function(evt) {
+                    open = true;
+                });
+                element.$.calendar.on('datepicker-before-close', function(evt) {
+                    beforeClose = true;
+                });
+                element.$.calendar.on('datepicker-close', function(evt) {
+                    close = true;
+                });
 
                 // Open Calendar
                 assert.equal(element.$.calendar.hasAttribute('hidden'), true, 'input container is hidden');

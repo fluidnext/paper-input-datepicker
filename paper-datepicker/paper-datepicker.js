@@ -59,9 +59,13 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 
 	_toggleDatepicker(e) {
 		if (this.$.calendar.hasAttribute('hidden')) {
+			this.$.calendar.dispatchEvent(new CustomEvent('datepicker-before-open'));
 			this.open(e);
+			this.$.calendar.dispatchEvent(new CustomEvent('datepicker-open'));
 		} else {
+			this.$.calendar.dispatchEvent(new CustomEvent('datepicker-before-close'));
 			this.close(e);
+			this.$.calendar.dispatchEvent(new CustomEvent('datepicker-close'));
 		}
 	}
 
