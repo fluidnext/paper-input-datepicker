@@ -42,9 +42,13 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 		this.dateUtils = new DateUtilities(this.day, this.month, this.year, this._locale.format);
 		this.weekdaysList = this._locale.labels.days;
 		this.table = this.dateUtils.month;
-		// this.value = this.date;
 	}
 
+	/**
+	 * 
+	 * @param {MouseEvent} e
+	 * @private
+	 */
 	_setDate(e) {
 		if (!e.model.get('day').currentMonth) {
 			return;
@@ -62,6 +66,11 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 		}
 	}
 
+	/**
+	 * 
+	 * @param {Object} day
+	 * @private 
+	 */
 	_getClass(day) {
 		let classes = '';
 		classes += day.currentMonth ? '' : 'out-of-current-month ';
@@ -70,30 +79,50 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 		return classes;
 	}
 
+	/**
+	 * 
+	 * @param {Object} newLocale
+	 * @public
+	 */
 	set locale(newLocale) {
 		this._locale = Object.assign(PaperMonthControlDefaultLocale, newLocale);
 	}
 
 	static get properties() {
 		return {
+			/**
+			 * @type {Number}
+			 */
 			day: {
 				type: Number,
 				value: (new Date()).getDate()
 			},
+			/**
+			 * @type {Number}
+			 */
 			month: {
 				type: Number,
 				value: (new Date()).getMonth() + 1
 			},
+			/**
+			 * @type {Number}
+			 */
 			year: {
 				type: Number,
 				value: (new Date()).getFullYear()
 			},
+			/**
+			 * @type {Array}
+			 */
 			table: {
 				type: Array,
 				value() {
 					return [[]]
 				}
 			},
+			/**
+			 * @type {String}
+			 */
 			value: {
 				type: String,
 				reflectToAttribute: true,

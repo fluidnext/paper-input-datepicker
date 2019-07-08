@@ -56,10 +56,16 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 
 	static get properties() {
 		return {
+			/**
+			 * @type {Number}
+			 */
 			month: {
 				type: Number,
 				value: (new Date()).getMonth() + 1
 			},
+			/**
+			 * @type {String}
+			 */
 			value: {
 				type: String,
 				notify: true,
@@ -68,6 +74,9 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 		};
 	}
 
+	/**
+	 * @private
+	 */
 	_previousMonth() {
 		if (!this.enabled) {
 			return;
@@ -104,14 +113,12 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 			current.remove();
 			previous.id = 'current';
 			this.enabled = true;
-			// this.$.current.addEventListener('value-changed', e => {
-			// 	let eventDate = e.detail.value.split('/');
-			// 	eventDate[2] = this.year;
-			// 	this.value = eventDate.join('/');
-			// });
 		}, 500);
 	}
 
+	/**
+	 * @private
+	 */
 	_nextMonth() {
 		if (!this.enabled) {
 			return;
@@ -139,10 +146,6 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 		current.classList.remove('on-screen');
 		current.classList.add('move-left');
 
-		// setTimeout(() => {
-		// 	next.classList.remove('move-right');
-		// 	next.classList.add('on-screen');
-		// });
 		requestAnimationFrame(() => {
 			next.classList.remove('move-right');
 			next.classList.add('on-screen');

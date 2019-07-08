@@ -15,7 +15,6 @@ import '../paper-calendar/paper-calendar';
 /**
  * @demo demo/index.html Paper-Datepicker
  */
-
 class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElement) {
 
 	static get template() {
@@ -49,18 +48,17 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	constructor() {
 		super();
 		this._locale = PaperDatepickerDefaultLocale;
-		// this.label = this._locale.labels.open || 'Click to open datepicker'; // No label from defaults
 	}
 
 	ready() {
 		super.ready();
-
-		// Initialized in `ready()` function from paper-month-control.js
-		// if (!this.value) {
-		// 	this.value = (new Date()).toLocaleDateString(this._locale.locale);
-		// }
 	}
 
+	/**
+	 * 
+	 * @param {MouseEvent} e 
+	 * @private
+	 */
 	_toggleDatepicker(e) {
 		if (this.$.calendar.hasAttribute('hidden')) {
 			this.open(e);
@@ -69,6 +67,11 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 		}
 	}
 
+	/**
+	 * 
+	 * @param {MouseEvent} e
+	 * @public 
+	 */
 	open(e) {
 		e.stopPropagation();
 		this.$.calendar.removeAttribute('hidden');
@@ -76,17 +79,25 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 			this.$.underlay.removeAttribute('hidden');
 		}
 		this.$.clear.removeAttribute('hidden');
-		// this.label = this._locale.labels.close || 'Click to close datepicker';
 	}
 
+	/**
+	 *
+	 * @param {MouseEvent} e
+	 * @public
+	 */
 	close(e) {
 		e.stopPropagation();
 		this.$.calendar.setAttribute('hidden', true);
 		this.$.underlay.setAttribute('hidden', true);
 		this.$.clear.setAttribute('hidden', true);
-		// this.label = this._locale.labels.open || 'Click to open datepicker';
 	}
 
+	/**
+	 * 
+	 * @param {string} newLocale
+	 * @public
+	 */
 	set locale(newLocale) {
 		this._locale = Object.assign(PaperDatepickerDefaultLocale, newLocale);
 	}
@@ -94,11 +105,17 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 
 	static get properties() {
 		return {
+			/**
+			 * @type {Boolean}
+			 */
 			disableClickOutside: {
 				type: Boolean,
 				value: false,
 				reflectToAttribute: true
 			},
+			/**
+			 * @type {String}
+			 */
 			value: {
 				type: String,
 				notify: true,
