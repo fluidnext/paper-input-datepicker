@@ -45,8 +45,8 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 	}
 
 	/**
-	 * 
-	 * @param {MouseEvent} e
+	 * Set calendar value when a date is clicked.
+	 * @param {MouseEvent} e Click event on a single date
 	 * @private
 	 */
 	_setDate(e) {
@@ -67,8 +67,9 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 	}
 
 	/**
-	 * 
-	 * @param {Object} day
+	 * Set the class for the date. (ex. different class for holidays, current month, current date...)
+	 * @param {Object} day Object type Date
+	 * @return {String} return classes for the day
 	 * @private 
 	 */
 	_getClass(day) {
@@ -80,7 +81,7 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 	}
 
 	/**
-	 * 
+	 * Set calendar locale to the provided locale definition Object 
 	 * @param {Object} newLocale
 	 * @public
 	 */
@@ -91,6 +92,7 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 	static get properties() {
 		return {
 			/**
+			 * Dau shown
 			 * @type {Number}
 			 */
 			day: {
@@ -98,6 +100,7 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 				value: (new Date()).getDate()
 			},
 			/**
+			 * Month shown
 			 * @type {Number}
 			 */
 			month: {
@@ -105,6 +108,7 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 				value: (new Date()).getMonth() + 1
 			},
 			/**
+			 * Set year
 			 * @type {Number}
 			 */
 			year: {
@@ -112,6 +116,7 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 				value: (new Date()).getFullYear()
 			},
 			/**
+			 * Months in the year
 			 * @type {Array}
 			 */
 			table: {
@@ -121,6 +126,7 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 				}
 			},
 			/**
+			 * Selected date
 			 * @type {String}
 			 */
 			value: {

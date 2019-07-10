@@ -55,7 +55,7 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	}
 
 	/**
-	 * 
+	 * Controls the paper-month-control visibility 
 	 * @param {MouseEvent} e 
 	 * @private
 	 */
@@ -68,7 +68,7 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	}
 
 	/**
-	 * 
+	 * Opens and shows the paper-month-calendar
 	 * @param {MouseEvent} e
 	 * @public 
 	 */
@@ -82,7 +82,7 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	}
 
 	/**
-	 *
+	 * Closes and hides the paper-month-calendar
 	 * @param {MouseEvent} e
 	 * @public
 	 */
@@ -94,8 +94,8 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	}
 
 	/**
-	 * 
-	 * @param {string} newLocale
+	 * Set calendar locale to the provided locale definition Object
+	 * @param {String} newLocale
 	 * @public
 	 */
 	set locale(newLocale) {
@@ -106,6 +106,8 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	static get properties() {
 		return {
 			/**
+			 * Variable to set behavior on click outside. 
+			 * If set to true disables datepicker closure on click outside, defaults to true.
 			 * @type {Boolean}
 			 */
 			disableClickOutside: {
@@ -114,6 +116,7 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 				reflectToAttribute: true
 			},
 			/**
+			 * Selected date
 			 * @type {String}
 			 */
 			value: {

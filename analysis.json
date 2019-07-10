@@ -9,15 +9,15 @@
         {
           "name": "locale",
           "type": "?",
-          "description": "",
+          "description": "Set calendar locale to the provided locale definition Object",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 86,
+              "line": 87,
               "column": 1
             },
             "end": {
-              "line": 88,
+              "line": 89,
               "column": 2
             }
           },
@@ -30,15 +30,15 @@
         {
           "name": "day",
           "type": "Number",
-          "description": "",
+          "description": "Dau shown",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 95,
+              "line": 97,
               "column": 3
             },
             "end": {
-              "line": 98,
+              "line": 100,
               "column": 4
             }
           },
@@ -51,15 +51,15 @@
         {
           "name": "month",
           "type": "Number",
-          "description": "",
+          "description": "Month shown",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 102,
+              "line": 105,
               "column": 3
             },
             "end": {
-              "line": 105,
+              "line": 108,
               "column": 4
             }
           },
@@ -72,15 +72,15 @@
         {
           "name": "year",
           "type": "Number",
-          "description": "",
+          "description": "Set year",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 109,
+              "line": 113,
               "column": 3
             },
             "end": {
-              "line": 112,
+              "line": 116,
               "column": 4
             }
           },
@@ -93,15 +93,15 @@
         {
           "name": "table",
           "type": "Array",
-          "description": "",
+          "description": "Months in the year",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 116,
+              "line": 121,
               "column": 3
             },
             "end": {
-              "line": 121,
+              "line": 126,
               "column": 4
             }
           },
@@ -114,15 +114,15 @@
         {
           "name": "value",
           "type": "String",
-          "description": "",
+          "description": "Selected date",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 125,
+              "line": 131,
               "column": 3
             },
             "end": {
-              "line": 129,
+              "line": 135,
               "column": 4
             }
           },
@@ -157,7 +157,7 @@
         },
         {
           "name": "_setDate",
-          "description": "",
+          "description": "Set calendar value when a date is clicked.",
           "privacy": "private",
           "sourceRange": {
             "start": {
@@ -173,7 +173,8 @@
           "params": [
             {
               "name": "e",
-              "type": "MouseEvent"
+              "type": "MouseEvent",
+              "description": "Click event on a single date"
             }
           ],
           "return": {
@@ -182,15 +183,15 @@
         },
         {
           "name": "_getClass",
-          "description": "",
+          "description": "Set the class for the date. (ex. different class for holidays, current month, current date...)",
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 73,
+              "line": 74,
               "column": 1
             },
             "end": {
-              "line": 79,
+              "line": 80,
               "column": 2
             }
           },
@@ -198,9 +199,14 @@
           "params": [
             {
               "name": "day",
-              "type": "Object"
+              "type": "Object",
+              "description": "Object type Date"
             }
-          ]
+          ],
+          "return": {
+            "type": "String",
+            "desc": "return classes for the day"
+          }
         }
       ],
       "staticMethods": [],
@@ -217,7 +223,7 @@
           "column": 0
         },
         "end": {
-          "line": 132,
+          "line": 138,
           "column": 1
         }
       },
@@ -227,14 +233,14 @@
       "attributes": [
         {
           "name": "day",
-          "description": "",
+          "description": "Dau shown",
           "sourceRange": {
             "start": {
-              "line": 95,
+              "line": 97,
               "column": 3
             },
             "end": {
-              "line": 98,
+              "line": 100,
               "column": 4
             }
           },
@@ -243,14 +249,14 @@
         },
         {
           "name": "month",
-          "description": "",
+          "description": "Month shown",
           "sourceRange": {
             "start": {
-              "line": 102,
+              "line": 105,
               "column": 3
             },
             "end": {
-              "line": 105,
+              "line": 108,
               "column": 4
             }
           },
@@ -259,14 +265,14 @@
         },
         {
           "name": "year",
-          "description": "",
+          "description": "Set year",
           "sourceRange": {
             "start": {
-              "line": 109,
+              "line": 113,
               "column": 3
             },
             "end": {
-              "line": 112,
+              "line": 116,
               "column": 4
             }
           },
@@ -275,14 +281,14 @@
         },
         {
           "name": "table",
-          "description": "",
+          "description": "Months in the year",
           "sourceRange": {
             "start": {
-              "line": 116,
+              "line": 121,
               "column": 3
             },
             "end": {
-              "line": 121,
+              "line": 126,
               "column": 4
             }
           },
@@ -291,14 +297,14 @@
         },
         {
           "name": "value",
-          "description": "",
+          "description": "Selected date",
           "sourceRange": {
             "start": {
-              "line": 125,
+              "line": 131,
               "column": 3
             },
             "end": {
-              "line": 129,
+              "line": 135,
               "column": 4
             }
           },
@@ -329,15 +335,15 @@
         {
           "name": "month",
           "type": "Number",
-          "description": "",
+          "description": "Month which days are shown",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 61,
+              "line": 62,
               "column": 3
             },
             "end": {
-              "line": 64,
+              "line": 65,
               "column": 4
             }
           },
@@ -350,15 +356,15 @@
         {
           "name": "value",
           "type": "String",
-          "description": "",
+          "description": "Selected date",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 68,
+              "line": 70,
               "column": 3
             },
             "end": {
-              "line": 72,
+              "line": 74,
               "column": 4
             }
           },
@@ -393,15 +399,15 @@
         },
         {
           "name": "_previousMonth",
-          "description": "",
+          "description": "Shows previous month",
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 79,
+              "line": 82,
               "column": 1
             },
             "end": {
-              "line": 116,
+              "line": 119,
               "column": 2
             }
           },
@@ -413,15 +419,15 @@
         },
         {
           "name": "_nextMonth",
-          "description": "",
+          "description": "Shows next month",
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 121,
+              "line": 125,
               "column": 1
             },
             "end": {
-              "line": 158,
+              "line": 162,
               "column": 2
             }
           },
@@ -446,7 +452,7 @@
           "column": 0
         },
         "end": {
-          "line": 159,
+          "line": 163,
           "column": 1
         }
       },
@@ -456,14 +462,14 @@
       "attributes": [
         {
           "name": "month",
-          "description": "",
+          "description": "Month which days are shown",
           "sourceRange": {
             "start": {
-              "line": 61,
+              "line": 62,
               "column": 3
             },
             "end": {
-              "line": 64,
+              "line": 65,
               "column": 4
             }
           },
@@ -472,14 +478,14 @@
         },
         {
           "name": "value",
-          "description": "",
+          "description": "Selected date",
           "sourceRange": {
             "start": {
-              "line": 68,
+              "line": 70,
               "column": 3
             },
             "end": {
-              "line": 72,
+              "line": 74,
               "column": 4
             }
           },
@@ -510,7 +516,7 @@
         {
           "name": "locale",
           "type": "?",
-          "description": "",
+          "description": "Set calendar locale to the provided locale definition Object",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -531,15 +537,15 @@
         {
           "name": "disableClickOutside",
           "type": "Boolean",
-          "description": "",
+          "description": "Variable to set behavior on click outside.\nIf set to true disables datepicker closure on click outside, defaults to true.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 110,
+              "line": 112,
               "column": 3
             },
             "end": {
-              "line": 114,
+              "line": 116,
               "column": 4
             }
           },
@@ -553,15 +559,15 @@
         {
           "name": "value",
           "type": "String",
-          "description": "",
+          "description": "Selected date",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 118,
+              "line": 121,
               "column": 3
             },
             "end": {
-              "line": 122,
+              "line": 125,
               "column": 4
             }
           },
@@ -596,7 +602,7 @@
         },
         {
           "name": "_toggleDatepicker",
-          "description": "",
+          "description": "Controls the paper-month-control visibility",
           "privacy": "private",
           "sourceRange": {
             "start": {
@@ -621,7 +627,7 @@
         },
         {
           "name": "open",
-          "description": "",
+          "description": "Opens and shows the paper-month-calendar",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -646,7 +652,7 @@
         },
         {
           "name": "close",
-          "description": "",
+          "description": "Closes and hides the paper-month-calendar",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -684,7 +690,7 @@
           "column": 0
         },
         "end": {
-          "line": 125,
+          "line": 128,
           "column": 1
         }
       },
@@ -694,14 +700,14 @@
       "attributes": [
         {
           "name": "disable-click-outside",
-          "description": "",
+          "description": "Variable to set behavior on click outside.\nIf set to true disables datepicker closure on click outside, defaults to true.",
           "sourceRange": {
             "start": {
-              "line": 110,
+              "line": 112,
               "column": 3
             },
             "end": {
-              "line": 114,
+              "line": 116,
               "column": 4
             }
           },
@@ -710,14 +716,14 @@
         },
         {
           "name": "value",
-          "description": "",
+          "description": "Selected date",
           "sourceRange": {
             "start": {
-              "line": 118,
+              "line": 121,
               "column": 3
             },
             "end": {
-              "line": 122,
+              "line": 125,
               "column": 4
             }
           },
