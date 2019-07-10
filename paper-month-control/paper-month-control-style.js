@@ -25,12 +25,23 @@ export const PaperMonthControlCustomStyle = html`
 	
 	.hovered { transition: all .2s ease-in-out; }
 	.hovered:hover { width: 100%; height: 90%; box-sizing: border-box; background-color: #56f; color: white; margin-top: 2%; margin-bottom: 2%; line-height: 240%; border-radius: 10%; }
-	.day-container.holyday { color: red; font-weight: bold; }
+	.day-container.holyday { color: red; font-weight: bold; @apply --holyday-style;}
 	
-	.selected .hovered { width: 100%; height: 90%; box-sizing: border-box; background-color: #56f; color: white; margin-top: 2%; margin-bottom: 2%; line-height: 240%; border-radius: 50%;  }
-	.today .hovered { width: 100%; height: 90%; box-sizing: border-box; background-color: #cfdfef; color: black; margin-top: 5%; margin-bottom: 5%; line-height: 254%; border-radius: 50%;  }
+	.selected .hovered { width: 100%; height: 90%; box-sizing: border-box; background-color: #56f; color: white; margin-top: 2%; margin-bottom: 2%; line-height: 240%; border-radius: 50%;  @apply --selected-date-style;}
+	.today .hovered { 
+		width: 100%; 
+		height: 90%; 
+		box-sizing: border-box; 
+		background-color: #cfdfef; 
+		color: black; 
+		margin-top: 5%; 
+		margin-bottom: 5%; 
+		line-height: 254%; 
+		border-radius: 50%;  
+		@apply --today-style;
+	}
 	
-	.selected.today .hovered { background-color: rgba(85, 102, 255, .5); }
+	.selected.today .hovered { background-color: var(--selected-today-background-color, rgba(85, 102, 255, .5)); }
 
 	.out-of-current-month { color: #d0d0d0;	}
 	.out-of-current-month.today .hovered { background-color: rgba(207,223,239, .6); }

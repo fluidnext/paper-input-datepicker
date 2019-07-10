@@ -43,4 +43,10 @@ export const PaperDatepickerCustomStyle = html`
 	}
 	
 	[hidden] { display: none; }
+
+	paper-input-container {
+		--paper-input-container-color: var(--paper-datepicker-main-color);
+		--paper-input-container-focus-color: var(--paper-datepicker-main-color);
+		--paper-input-container-input-color: var(--paper-input-font-color);
+	}
 </style>`;

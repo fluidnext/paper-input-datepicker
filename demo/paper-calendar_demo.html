@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Paper Input Date Picker</title>
+
+    <script type="module" src="../paper-calendar/paper-calendar.js"></script>
+    <script type="module">
+        import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+        import '@polymer/iron-demo-helpers/demo-snippet.js';
+        import '../icons/paper-input-datepicker-icons.js';
+    </script>
+    <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles">
+            body {
+                font-family: roboto;
+            }
+        </style>
+    </custom-style>
+</head>
+
+<body>
+    <div class="vertical-section-container centered">
+        <h1>Fluid Paper Calendar</h1>
+    </div>
+    <div class="vertical-section-container centered">
+        <h3>Base Paper Calendar</h3>
+        <demo-snippet>
+            <template>
+                <paper-calendar year="2020" month="04"></paper-calendar>
+            </template>
+        </demo-snippet>
+    </div>
+    <div class="vertical-section-container centered">
+        <h3>Paper Calendar Custom Style</h3>
+        <demo-snippet>
+            <template>
+                <custom-style>
+                    <style is="custom-style" include="demo-pages-shared-styles">
+                        paper-calendar#customStyle {
+                            /* Host Variable */
+                            --accent-color: rgb(37, 11, 208);
+                            
+                            --calendar-toolbar-style: {
+                                /* background-color: rgb(37, 11, 208); change only this element */
+                                color: #FFF;
+                            };
+                
+                            /* Style for paper-month-control */
+                            --today-style: {
+                                background-color: rgba(255, 73, 77, .6);
+                                color: white;
+                            };
+                
+                            --holyday-style: {
+                                color: rgb(37, 11, 208);
+                            };
+                        }
+                    </style>
+                </custom-style>
+                <paper-calendar id="customStyle" month="07"></paper-calendar>
+            </template>
+        </demo-snippet>
+    </div>
+</body>
+
+</html>

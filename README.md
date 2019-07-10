@@ -66,6 +66,20 @@ const template = html`
 document.head.appendChild(template.content);
 ```
 
+#### Custome Style, from outside
+Find some test on the various demo file.
+
+**PAPER-MONTH-CONTROL:**            
+
+**_--selected-date-background-color_**: Background-color for the selected date.         
+**_--today-style_**: Object Style for today date in the calendar.       
+**_--selected-date-style_**: Object Style for the selected date.      
+**_--holiday-style_**: Object Style for the holidays date.      
+
+**PAPER-CALENDAR:**           
+
+**_--calendar-toolbar-style_**: Object Style for the toolbar in the calendar component.    
+
 ## Contributing
 If you want to send a PR to this element, here are
 the instructions for running the tests and demo locally:

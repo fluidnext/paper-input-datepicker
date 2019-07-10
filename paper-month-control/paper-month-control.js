@@ -6,6 +6,9 @@ import {PaperMonthControlDefaultLocale} from './paper-month-control-default-loca
 import {PaperMonthControlCustomStyle} from './paper-month-control-style';
 import DateUtilities from '../date-utilities';
 
+/**
+ * @demo demo/paper-month_demo.html Paper-Month-Control
+ */
 class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 
 	static get template() {
@@ -39,9 +42,13 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 		this.dateUtils = new DateUtilities(this.day, this.month, this.year, this._locale.format);
 		this.weekdaysList = this._locale.labels.days;
 		this.table = this.dateUtils.month;
-		// this.value = this.date;
 	}
 
+	/**
+	 * Set calendar value when a date is clicked.
+	 * @param {MouseEvent} e Click event on a single date
+	 * @private
+	 */
 	_setDate(e) {
 		if (!e.model.get('day').currentMonth) {
 			return;
@@ -59,6 +66,12 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 		}
 	}
 
+	/**
+	 * Set the class for the date. (ex. different class for holidays, current month, current date...)
+	 * @param {Object} day Object type Date
+	 * @return {String} return classes for the day
+	 * @private 
+	 */
 	_getClass(day) {
 		let classes = '';
 		classes += day.currentMonth ? '' : 'out-of-current-month ';
@@ -67,30 +80,55 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 		return classes;
 	}
 
+	/**
+	 * Set calendar locale to the provided locale definition Object 
+	 * @param {Object} newLocale
+	 * @public
+	 */
 	set locale(newLocale) {
 		this._locale = Object.assign(PaperMonthControlDefaultLocale, newLocale);
 	}
 
 	static get properties() {
 		return {
+			/**
+			 * Dau shown
+			 * @type {Number}
+			 */
 			day: {
 				type: Number,
 				value: (new Date()).getDate()
 			},
+			/**
+			 * Month shown
+			 * @type {Number}
+			 */
 			month: {
 				type: Number,
 				value: (new Date()).getMonth() + 1
 			},
+			/**
+			 * Set year
+			 * @type {Number}
+			 */
 			year: {
 				type: Number,
 				value: (new Date()).getFullYear()
 			},
+			/**
+			 * Months in the year
+			 * @type {Array}
+			 */
 			table: {
 				type: Array,
 				value() {
 					return [[]]
 				}
 			},
+			/**
+			 * Selected date
+			 * @type {String}
+			 */
 			value: {
 				type: String,
 				reflectToAttribute: true,
