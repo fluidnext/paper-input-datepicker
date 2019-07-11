@@ -74,7 +74,7 @@
                         };
                     </style>
                 </custom-style>
-                <paper-datepicker id="customStyle" label="Select Date"></paper-datepicker>
+                <paper-datepicker id="customStyle" label="Select Date" disable-click-outside="true"></paper-datepicker>
             </template>
         </demo-snippet>
     </div>
@@ -104,13 +104,12 @@
             </template>
         </demo-snippet>
     </div>
-    <!-- NOT WORKING WHY? -->
     <div class="vertical-section-container centered">
         <h3>Paper Datepicker error</h3>
         <demo-snippet>
             <template>
-                <paper-datepicker label="Select Day" color-type="rgb" required auto-validate error-message="needs some color!"></paper-datepicker>
-                <paper-datepicker id="inputForValidation" required label="This input is manually validated" error-message="letters only!"></paper-datepicker>
+                <paper-datepicker label="Select Day" color-type="rgb" required auto-validate error-message="needs some Date!"></paper-datepicker>
+                <paper-datepicker id="inputForValidation" required label="This input is manually validated" error-message="needs some Date!"></paper-datepicker>
                 <div class="button-validation">
                     <paper-button onclick="validate()">Validate!</paper-button>
                 </div>
@@ -122,25 +121,6 @@
             </template>
         </demo-snippet>
     </div>
-    <!-- <div class="vertical-section-container centered">
-        <h1>Other Components</h1>
-    </div>
-    <div class="vertical-section-container centered">
-        <h3>Fluid Paper Calendar</h3>
-        <demo-snippet>
-            <template>
-                <paper-calendar year="2020" month="07"></paper-calendar>
-            </template>
-        </demo-snippet>
-    </div>
-    <div class="vertical-section-container centered">
-        <h3>Fluid Paper Month Control</h3>
-        <demo-snippet>
-            <template>
-                <paper-month-control year="2020" month="02"></paper-month-control>
-            </template>
-        </demo-snippet>
-    </div> -->
 </body>
 
 </html>

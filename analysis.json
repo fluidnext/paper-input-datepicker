@@ -520,11 +520,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 100,
+              "line": 124,
               "column": 1
             },
             "end": {
-              "line": 102,
+              "line": 126,
               "column": 2
             }
           },
@@ -541,11 +541,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 112,
+              "line": 136,
               "column": 3
             },
             "end": {
-              "line": 116,
+              "line": 140,
               "column": 4
             }
           },
@@ -563,11 +563,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 121,
+              "line": 145,
               "column": 3
             },
             "end": {
-              "line": 125,
+              "line": 149,
               "column": 4
             }
           },
@@ -590,7 +590,7 @@
               "column": 1
             },
             "end": {
-              "line": 54,
+              "line": 61,
               "column": 2
             }
           },
@@ -606,11 +606,11 @@
           "privacy": "private",
           "sourceRange": {
             "start": {
-              "line": 61,
+              "line": 68,
               "column": 1
             },
             "end": {
-              "line": 67,
+              "line": 74,
               "column": 2
             }
           },
@@ -626,16 +626,41 @@
           }
         },
         {
+          "name": "_clear",
+          "description": "Clear input value",
+          "privacy": "private",
+          "sourceRange": {
+            "start": {
+              "line": 81,
+              "column": 1
+            },
+            "end": {
+              "line": 85,
+              "column": 2
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "event",
+              "type": "MouseEvent"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
           "name": "open",
           "description": "Opens and shows the paper-month-calendar",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 74,
+              "line": 92,
               "column": 1
             },
             "end": {
-              "line": 81,
+              "line": 98,
               "column": 2
             }
           },
@@ -656,11 +681,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 88,
+              "line": 105,
               "column": 1
             },
             "end": {
-              "line": 93,
+              "line": 117,
               "column": 2
             }
           },
@@ -690,7 +715,7 @@
           "column": 0
         },
         "end": {
-          "line": 128,
+          "line": 152,
           "column": 1
         }
       },
@@ -703,11 +728,11 @@
           "description": "Variable to set behavior on click outside.\nIf set to true disables datepicker closure on click outside, defaults to true.",
           "sourceRange": {
             "start": {
-              "line": 112,
+              "line": 136,
               "column": 3
             },
             "end": {
-              "line": 116,
+              "line": 140,
               "column": 4
             }
           },
@@ -719,11 +744,11 @@
           "description": "Selected date",
           "sourceRange": {
             "start": {
-              "line": 121,
+              "line": 145,
               "column": 3
             },
             "end": {
-              "line": 125,
+              "line": 149,
               "column": 4
             }
           },

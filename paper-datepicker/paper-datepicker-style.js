@@ -41,6 +41,10 @@ export const PaperDatepickerCustomStyle = html`
 		height: 8000px;
 		z-index: 9999;
 	}
+
+	#clearButton{
+		cursor: pointer;
+	}
 	
 	[hidden] { display: none; }
 

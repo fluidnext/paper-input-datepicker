@@ -26,14 +26,14 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 		<div class="underlay" id="underlay" hidden on-click="_toggleDatepicker"></div>
 		<div class="control-container">
 			<paper-input-container on-click="_toggleDatepicker" no-label-float="[[noLabelFloat]]" always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]" auto-validate$="[[autoValidate]]" disabled$="[[disabled]]" invalid="[[invalid]]">
-				<!-- <div slot="label" for="datepicker-date">[[label]]</div> -->
 				<label hidden$="[[!label]]" slot="label" for$="[[_inputId]]" aria-hidden="true">[[label]]</label>
-				<iron-input bind-value="{{value}}" slot="input" on-click="_toggleDatepicker" invalid="{{invalid}}" validator="[[validator]]" required="[[required]]">
+				<iron-input id$="[[_inputId]]" bind-value="{{value}}" slot="input" on-click="_toggleDatepicker" invalid="{{invalid}}" validator="[[validator]]" required="[[required]]">
 					<input type="text" readonly>
 				</iron-input>
-				<div slot="suffix" id="clear" on-click="close" hidden>
+				<!-- <div slot="suffix" id="clear" on-click="close" hidden>
 					<iron-icon icon="clear">
-				</div>
+				</div> -->
+				<iron-icon id="clearButton" slot="suffix" suffix icon="paper-input-datepicker:clear" on-click="_clear" hidden></iron-icon>
 				<template is="dom-if" if="[[errorMessage]]">
                     <paper-input-error aria-live="assertive" slot="add-on">[[errorMessage]]</paper-input-error>
                 </template>
@@ -52,6 +52,13 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 
 	ready() {
 		super.ready();
+
+		let calendarElement = this.$.calendar.querySelector('paper-calendar');
+		calendarElement.addEventListener('value-changed', e => {
+			if (this.disableClickOutside) {
+				this.close();
+			}
+		});
 	}
 
 	/**
@@ -68,6 +75,17 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	}
 
 	/**
+	 * Clear input value
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_clear(event){
+		event.stopPropagation();
+		this.value = '';
+		this.$.clearButton.setAttribute('hidden', true);
+	}
+
+	/**
 	 * Opens and shows the paper-month-calendar
 	 * @param {MouseEvent} e
 	 * @public 
@@ -78,7 +96,6 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 		if (!this.disableClickOutside) {
 			this.$.underlay.removeAttribute('hidden');
 		}
-		this.$.clear.removeAttribute('hidden');
 	}
 
 	/**
@@ -87,10 +104,17 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	 * @public
 	 */
 	close(e) {
-		e.stopPropagation();
+		if (e) {
+			e.stopPropagation();	
+		}
 		this.$.calendar.setAttribute('hidden', true);
 		this.$.underlay.setAttribute('hidden', true);
-		this.$.clear.setAttribute('hidden', true);
+
+		if (!this.value || this.value === '') {
+			this.$.clearButton.setAttribute('hidden', true);
+		}else{
+			this.$.clearButton.removeAttribute('hidden', true);
+		}
 	}
 
 	/**
