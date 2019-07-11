@@ -14,6 +14,7 @@
         import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
         import '@polymer/iron-demo-helpers/demo-snippet.js';
         import '@polymer/paper-button/paper-button';
+        import '@polymer/paper-toast/paper-toast.js';
         import '../icons/paper-input-datepicker-icons.js';
     </script>
     <custom-style>
@@ -75,6 +76,49 @@
                     </style>
                 </custom-style>
                 <paper-datepicker id="customStyle" label="Select Date" disable-click-outside="true"></paper-datepicker>
+            </template>
+        </demo-snippet>
+    </div>
+    <div class="vertical-section-container centered">
+        <h3>Fluid paper-datepicker Custom Event</h3>
+        <demo-snippet>
+            <template>
+                <paper-datepicker id="listenEvent" label="Select Date"></paper-datepicker>
+                
+                <!-- Paper Toast For notify event -->
+                <paper-toast id="toast1" duration="-1" text="Listen datepicker-open event. Event when calendar is open">
+                    <paper-button onclick="toast1.toggle()">Close now!</paper-button>
+                </paper-toast>
+                <paper-toast id="toast2" duration="-1" text="Listen datepicker-close event. Event when calendar is closed">
+                    <paper-button onclick="toast2.toggle()">Close now!</paper-button>
+                </paper-toast>
+                <!-- END -->
+
+                <script type="module">
+                    let element = document.getElementById('listenEvent');
+                    
+                    // datepicker-before-open Event
+                    // I use console.info because there must be only one toast per time in the component
+                    element.addEventListener('datepicker-before-open', function(){
+                        console.info('datepicker-before-open');
+                    });
+
+                    // datepicker-open Event
+                    element.addEventListener('datepicker-open', function () {
+                        document.getElementById('toast1').open();
+                    });
+
+                    // datepicker-before-close Event
+                    // I use console.info because there must be only one toast per time in the component
+                    element.addEventListener('datepicker-before-close', function () {
+                        console.info('datepicker-before-open');
+                    });
+
+                    // datepicker-close Event
+                    element.addEventListener('datepicker-close', function () {
+                        document.getElementById('toast2').open();
+                    });
+                </script>
             </template>
         </demo-snippet>
     </div>
