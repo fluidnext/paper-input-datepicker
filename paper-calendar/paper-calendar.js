@@ -43,14 +43,19 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 
 	ready() {
 		super.ready();
-		this.enabled = true;
-		this.monthShown = this.month;
-		this.monthLabels = this._locale.labels.months;
-		this.monthLabel = this.monthLabels[this.month - 1];
-		this.year = (new Date()).getFullYear();
+		this._setDefaultValue(this.value);
+		// this.enabled = true;
+		// this.monthShown = this.month;
+		// this.monthLabels = this._locale.labels.months;
+		// this.monthLabel = this.monthLabels[this.month - 1];
+		// this.year = (new Date()).getFullYear();
 
-		this.$.current.addEventListener('value-changed', e => {
-			this.value = e.detail.value;
+		this.addEventListener('datepicker-before-open', e => {
+			this.$.current.dispatchEvent(new CustomEvent('datepicker-before-open', e));
+		});
+		this.addEventListener('datepicker-clear-value', e => {
+			this.$.current.dispatchEvent(new CustomEvent('datepicker-clear-value', e));
+			this._setDefaultValue();
 		});
 	}
 
@@ -74,6 +79,27 @@ class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 				reflectToAttribute: true
 			}
 		};
+	}
+
+	/**
+	 * Check if value propertie is undefined
+	 * @param {String} date 
+	 * @private
+	 */
+	_setDefaultValue(date) {
+		if (date === undefined) {
+			this.enabled = true;
+			this.monthShown = this.month;
+			this.monthLabels = this._locale.labels.months;
+			this.monthLabel = this.monthLabels[this.month - 1];
+			this.year = (new Date()).getFullYear();
+		}else{
+			this.enabled = true;
+			this.monthShown = parseInt(date.split('/')[1]);
+			this.monthLabels = this._locale.labels.months;
+			this.monthLabel = this.monthLabels[parseInt(date.split('/')[1]) - 1];
+			this.year = parseInt(date.split('/')[2]);
+		}
 	}
 
 	/**

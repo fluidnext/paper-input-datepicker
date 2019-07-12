@@ -17,6 +17,11 @@
             <paper-datepicker></paper-datepicker>
         </template>
     </test-fixture>
+    <test-fixture id="initWithValue">
+        <template>
+            <paper-datepicker value="03/07/2019"></paper-datepicker>
+        </template>
+    </test-fixture>
     <script>
         let a = new Date();
         let currentDate = a.toLocaleString('it-IT').split(',')[0].split('/').map(c => (c.length < 2 ? '0' : '') + c).join('/');
@@ -24,7 +29,11 @@
         suite('paper-input-datepicker-test', function () {
             test('init-defaults', function () {
                 let element = fixture('initDefaults');
-                assert.equal(element.value, currentDate);
+                assert.equal(element.value, undefined);
+            });
+            test('init value', function () {
+                let element = fixture('initWithValue');
+                assert.equal(element.value, '03/07/2019');
             });
             test('open and close paper-input-datepicker', function(){
                 let element = fixture('initDefaults');
