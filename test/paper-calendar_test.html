@@ -22,6 +22,11 @@
             <paper-calendar></paper-calendar>
         </template>
     </test-fixture>
+    <test-fixture id="initWithValue">
+        <template>
+            <paper-calendar value="03/08/2019"></paper-calendar>
+        </template>
+    </test-fixture>
     <test-fixture id="monthChange">
         <template>
             <paper-calendar month="07"></paper-calendar>
@@ -45,29 +50,33 @@
 
             test('Test Init Default options', function () {
                 let element = fixture('initDefaults');
-                assert.equal(element.value, currentDate);
+                assert.equal(element.value, undefined);
+            });
+            test('Test Init with date value', function () {
+                let element = fixture('initWithValue');
+                assert.equal(element.value, '03/08/2019');
             });
             test('Test Month Changed (Previous Month)', function () {
                 let element = fixture('monthChange');
                 element._previousMonth();
-                assert.equal(parseInt(element.value.split('/')[1]), 6);
+                assert.equal(element.monthShown, 6);
             });
             test('Test Month Changed (Next Month)', function () {
                 let element = fixture('monthChange');
                 element._nextMonth();
-                assert.equal(parseInt(element.value.split('/')[1]), 8);
+                assert.equal(element.monthShown, 8);
             });
             test('Test Year Change (Previous)', function () {
                 let element = fixture('yearChangePrevious');
                 element._previousMonth();
-                assert.equal(parseInt(element.value.split('/')[1]), 12);
-                assert.equal(parseInt(element.value.split('/')[2]), parseInt(currentDate.split('/')[2]) - 1);
+                assert.equal(element.monthShown, 12);
+                assert.equal(element.year, parseInt(currentDate.split('/')[2]) - 1);
             });
             test('Test Year Change (Next)', function () {
                 let element = fixture('yearChangeNext');
                 element._nextMonth();
-                assert.equal(parseInt(element.value.split('/')[1]), 1);
-                assert.equal(parseInt(element.value.split('/')[2]), parseInt(currentDate.split('/')[2]) + 1);
+                assert.equal(element.monthShown, 1);
+                assert.equal(element.year, parseInt(currentDate.split('/')[2]) + 1);
             });
             test('Test !this.enable (Previous)', function () {
                 let clock = window.useFakeTimers();
@@ -76,7 +85,7 @@
                 element._nextMonth();
                 element._previousMonth();
                 clock.tick(500);
-                assert.equal(parseInt(element.value.split('/')[1]), parseInt(currentDate.split('/')[1]) - 1);
+                assert.equal(element.monthShown, parseInt(currentDate.split('/')[1]) - 1);
             });
             test('Test !this.enable (Next)', function () {
                 let clock = window.useFakeTimers();
@@ -85,7 +94,7 @@
                 element._previousMonth();
                 element._nextMonth();
                 clock.tick(500);
-                assert.equal(parseInt(element.value.split('/')[1]), parseInt(currentDate.split('/')[1]) + 1);
+                assert.equal(element.monthShown, parseInt(currentDate.split('/')[1]) + 1);
             });
         });
     </script>
