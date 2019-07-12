@@ -37,11 +37,27 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 
 	ready() {
 		super.ready();
-		this._locale = PaperMonthControlDefaultLocale;
-		this.date = `${('00' + this.day).slice(-2)}/${('00' + this.month).slice(-2)}/${('0000' + this.year).slice(-4)}`;
-		this.dateUtils = new DateUtilities(this.day, this.month, this.year, this._locale.format);
-		this.weekdaysList = this._locale.labels.days;
-		this.table = this.dateUtils.month;
+		this._setDefaultValue(this.value);
+		// this._locale = PaperMonthControlDefaultLocale;
+		// this.date = `${('00' + this.day).slice(-2)}/${('00' + this.month).slice(-2)}/${('0000' + this.year).slice(-4)}`;
+		// this.dateUtils = new DateUtilities(this.day, this.month, this.year, this._locale.format);
+		// this.weekdaysList = this._locale.labels.days;
+		// this.table = this.dateUtils.month;
+		this.addEventListener('datepicker-before-open', e => {
+			let days = this.shadowRoot.querySelectorAll('.day-container');
+			for (let i = 0; i < days.length; i++) {
+				if (parseInt(days[i].innerText) === parseInt(this.value.split('/')[0]) && !days[i].classList.contains('out-of-current-month')) {
+					days[i].classList.add('selected');
+					this.selected = days[i];
+					break;
+				}
+			}
+		});
+		this.addEventListener('datepicker-clear-value', e => {
+			let days = this.shadowRoot.querySelectorAll('.day-container');
+			days.forEach(day => day.classList.remove('selected'));
+			this._setDefaultValue();
+		});
 	}
 
 	/**
@@ -78,6 +94,25 @@ class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 		classes += day.weekday === 0 || day.weekday === 7 ? 'holyday ' : 'weekday ';
 		classes += day.today ? 'today ' : '';
 		return classes;
+	}
+
+	/**
+	 * Check if value propertie is undefined
+	 * @param {String} date
+	 * @private
+	 */
+	_setDefaultValue(date){
+		this._locale = PaperMonthControlDefaultLocale;
+		this.weekdaysList = this._locale.labels.days;
+		if (date === undefined) {
+			this.date = `${('00' + this.day).slice(-2)}/${('00' + this.month).slice(-2)}/${('0000' + this.year).slice(-4)}`;
+			this.dateUtils = new DateUtilities(this.day, this.month, this.year, this._locale.format);
+			this.table = this.dateUtils.month;
+		} else{
+			this.date = date;
+			this.dateUtils = new DateUtilities(parseInt(date.split('/')[0]), parseInt(date.split('/')[1]), parseInt(date.split('/')[2]), this._locale.format);
+			this.table = this.dateUtils.month;
+		}
 	}
 
 	/**

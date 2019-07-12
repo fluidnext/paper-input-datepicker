@@ -30,10 +30,7 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 				<iron-input id$="[[_inputId]]" bind-value="{{value}}" slot="input" on-click="_toggleDatepicker" invalid="{{invalid}}" validator="[[validator]]" required="[[required]]">
 					<input type="text" readonly>
 				</iron-input>
-				<!-- <div slot="suffix" id="clear" on-click="close" hidden>
-					<iron-icon icon="clear">
-				</div> -->
-				<iron-icon id="clearButton" slot="suffix" suffix icon="paper-input-datepicker:clear" on-click="_clear" hidden></iron-icon>
+				<iron-icon id="clearButton" slot="suffix" suffix icon="paper-input-datepicker:clear" on-click="_clear"></iron-icon>
 				<template is="dom-if" if="[[errorMessage]]">
                     <paper-input-error aria-live="assertive" slot="add-on">[[errorMessage]]</paper-input-error>
                 </template>
@@ -52,7 +49,9 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 
 	ready() {
 		super.ready();
-
+		if (this.value === undefined) {
+			this.$.clearButton.setAttribute('hidden', true);
+		}
 		let calendarElement = this.$.calendar.querySelector('paper-calendar');
 		calendarElement.addEventListener('value-changed', e => {
 			if (this.disableClickOutside) {
@@ -69,6 +68,7 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 	_toggleDatepicker(e) {
 		if (this.$.calendar.hasAttribute('hidden')) {
 			this.dispatchEvent(new CustomEvent('datepicker-before-open', e));
+			this.$.calendar.querySelector('paper-calendar').dispatchEvent(new CustomEvent('datepicker-before-open', e));
 			this.open(e);
 			this.dispatchEvent(new CustomEvent('datepicker-open', e));
 		} else {
@@ -87,6 +87,7 @@ class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElemen
 		event.stopPropagation();
 		this.value = '';
 		this.$.clearButton.setAttribute('hidden', true);
+		this.$.calendar.querySelector('paper-calendar').dispatchEvent(new CustomEvent('datepicker-clear-value'));
 	}
 
 	/**
