@@ -2,9 +2,9 @@ import {html, PolymerElement} from '@polymer/polymer/polymer-element';
 import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class';
 
 import '@polymer/polymer/lib/elements/dom-repeat';
-import {PaperMonthControlDefaultLocale} from './paper-month-control-default-locale';
-import {PaperMonthControlCustomStyle} from './paper-month-control-style';
-import DateUtilities from '../date-utilities';
+import {PaperMonthControlDefaultLocale} from './paper-month-control-default-locale.js';
+import {PaperMonthControlCustomStyle} from './paper-month-control-style.js';
+import DateUtilities from './date-utilities.js';
 
 class PaperMonthControl extends mixinBehaviors([], PolymerElement) {
 

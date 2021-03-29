@@ -1,11 +1,11 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element';
 import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class';
 
-import {PaperCalendarDefaultLocale} from './paper-calendar-default-locale';
-import {PaperCalendarCustomStyle} from './paper-calendar-style';
+import {PaperCalendarDefaultLocale} from './paper-calendar-default-locale.js';
+import {PaperCalendarCustomStyle} from './paper-calendar-style.js';
 
 import '@polymer/iron-icon/iron-icon';
-import '../paper-month-control/paper-month-control';
+import './paper-month-control.js';
 
 class PaperCalendar extends mixinBehaviors([], PolymerElement) {
 

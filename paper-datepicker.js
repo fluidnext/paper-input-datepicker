@@ -7,10 +7,10 @@ import '@polymer/paper-input/paper-input-container';
 import '@polymer/iron-input/iron-input';
 import '@polymer/paper-input/paper-input-error';
 
-import {PaperDatepickerDefaultLocale} from './paper-datepicker-default-locale';
-import {PaperDatepickerCustomStyle} from './paper-datepicker-style';
+import {PaperDatepickerDefaultLocale} from './paper-datepicker-default-locale.js';
+import {PaperDatepickerCustomStyle} from './paper-datepicker-style.js';
 
-import '../paper-calendar/paper-calendar';
+import './paper-calendar.js';
 
 class PaperDatepicker extends mixinBehaviors([PaperInputBehavior], PolymerElement) {
 
